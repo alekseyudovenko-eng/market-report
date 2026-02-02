@@ -1,933 +1,208 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Analytical Report: Vegetable Oils & Fats (Jan 26 - Feb 2, 2026)</title>
-    
-    <!-- Tailwind CSS -->
+    <title>Аналитика рынка растительных масел (26.01 - 01.02.2026)</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    
-    <!-- FontAwesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f5f5f4; /* stone-100 */
-        }
-        
-        /* Chart Container Strict Styling */
-        .chart-container {
-            position: relative;
-            width: 100%;
-            max-width: 100%;
-            height: 350px;
-            margin: 0 auto;
-        }
-
-        @media (min-width: 768px) {
-            .chart-container {
-                height: 400px;
-            }
-        }
-        
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1; 
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #d6d3d1; 
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #a8a29e; 
-        }
-
-        .nav-item.active {
-            background-color: #fef3c7; /* amber-100 */
-            color: #d97706; /* amber-700 */
-            border-right: 4px solid #d97706;
-        }
-
-        .fade-in {
-            animation: fadeIn 0.4s ease-in-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .card { background: #ffffff; border-radius: 12px; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); }
+        .trend-up { color: #10b981; }
+        .trend-down { color: #ef4444; }
     </style>
 </head>
-<body class="text-stone-800 antialiased h-screen flex overflow-hidden">
+<body class="bg-gray-50 text-gray-900 leading-relaxed">
 
-    <!-- Chosen Palette: Warm Neutrals (Stone/Warm Gray) with Amber (Oil) and Emerald (Growth) accents. 
-         This creates a professional, organic feel suitable for agricultural commodities. -->
+    <nav class="bg-slate-800 text-white p-4 sticky top-0 z-50 shadow-md">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-bold tracking-tight">Market Analytics: Vegetable Oils 2026</h1>
+            <span class="text-sm bg-slate-700 px-3 py-1 rounded">Период: 26 января – 1 февраля 2026</span>
+        </div>
+    </nav>
 
-    <!-- Application Structure Plan: 
-         - Layout: Sidebar navigation (collapsible on mobile) + Main Content Area.
-         - Dashboard approach: The user starts at an "Executive Summary" to get the big picture.
-         - Thematic Sections: Prices, Production/Trade, Logistics, Policy, Country Focus.
-         - Interaction: Users click nav items to swap views (SPA feel). Charts have filters. Policy section uses accordions to manage text density.
-         - Justification: The report contains diverse data types (numbers, text, status). A dashboard structure allows the user to digest quantitative data separately from qualitative policy text.
-    -->
-
-    <!-- Visualization & Content Choices:
-         - Prices: Line Chart (Chart.js) to show trends over time. Interaction: Toggle datasets on/off.
-         - Production: Bar Chart (Chart.js) for comparative volume.
-         - Logistics: Status Cards (Green/Yellow/Red) to quickly convey risk.
-         - Policy: Text cards with "Impact" badges.
-         - Country Info: Dropdown + Dynamic Card update (JS) to avoid a massive 27-row table.
-         - NO SVG/Mermaid: All icons are FontAwesome or CSS shapes. Charts are Canvas.
-    -->
-
-    <!-- CONFIRMATION: NO SVG graphics used (embedded). NO Mermaid JS used. -->
-
-    <!-- Sidebar Navigation -->
-    <aside class="w-64 bg-white border-r border-stone-200 hidden md:flex flex-col z-20 shadow-sm">
-        <div class="p-6 border-b border-stone-100">
-            <h1 class="text-xl font-bold text-stone-900 tracking-tight">
-                <i class="fa-solid fa-droplet text-amber-500 mr-2"></i>Market<span class="text-amber-600">Sight</span>
-            </h1>
-            <p class="text-xs text-stone-500 mt-1 uppercase tracking-wide">Jan 26 - Feb 02, 2026</p>
+    <main class="container mx-auto px-4 py-8">
+        <!-- Ключевые показатели макроэкономики -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="card p-6 border-l-4 border-blue-500">
+                <h3 class="text-gray-500 text-sm font-semibold uppercase">Рынок масел (Global)</h3>
+                <p class="text-3xl font-bold">$341.99 млрд</p>
+                <p class="text-sm mt-2">Прогноз CAGR: 6.22% – 7.29%</p>
+            </div>
+            <div class="card p-6 border-l-4 border-amber-500">
+                <h3 class="text-gray-500 text-sm font-semibold uppercase">Цена Brent (январь)</h3>
+                <p class="text-3xl font-bold">$72.00 / барр.</p>
+                <p class="trend-up text-sm font-medium">↑ Максимум с августа 2025</p>
+            </div>
+            <div class="card p-6 border-l-4 border-red-500">
+                <h3 class="text-gray-500 text-sm font-semibold uppercase">Мировые запасы (25/26)</h3>
+                <p class="text-3xl font-bold">33.8 млн т</p>
+                <p class="text-sm mt-2 text-red-600">4-летний минимум</p>
+            </div>
         </div>
 
-        <nav class="flex-1 overflow-y-auto py-4">
-            <ul class="space-y-1">
-                <li><button onclick="navigate('summary')" class="nav-item active w-full text-left px-6 py-3 hover:bg-stone-50 transition-colors font-medium text-sm flex items-center"><i class="fa-solid fa-chart-pie w-6 opacity-70"></i> Executive Summary</button></li>
-                <li><button onclick="navigate('prices')" class="nav-item w-full text-left px-6 py-3 hover:bg-stone-50 transition-colors font-medium text-sm flex items-center"><i class="fa-solid fa-arrow-trend-up w-6 opacity-70"></i> Price Dynamics</button></li>
-                <li><button onclick="navigate('production')" class="nav-item w-full text-left px-6 py-3 hover:bg-stone-50 transition-colors font-medium text-sm flex items-center"><i class="fa-solid fa-warehouse w-6 opacity-70"></i> Production & Flows</button></li>
-                <li><button onclick="navigate('logistics')" class="nav-item w-full text-left px-6 py-3 hover:bg-stone-50 transition-colors font-medium text-sm flex items-center"><i class="fa-solid fa-truck-fast w-6 opacity-70"></i> Logistics & War Risks</button></li>
-                <li><button onclick="navigate('policy')" class="nav-item w-full text-left px-6 py-3 hover:bg-stone-50 transition-colors font-medium text-sm flex items-center"><i class="fa-solid fa-gavel w-6 opacity-70"></i> Policy & Regulation</button></li>
-                <li><button onclick="navigate('countries')" class="nav-item w-full text-left px-6 py-3 hover:bg-stone-50 transition-colors font-medium text-sm flex items-center"><i class="fa-solid fa-earth-europe w-6 opacity-70"></i> Country Focus</button></li>
-            </ul>
-        </nav>
+        <!-- Сводная таблица цен -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold mb-6 flex items-center">
+                <span class="mr-2">📊</span> Динамика котировок (Цены из отчета)
+            </h2>
+            <div class="overflow-x-auto card">
+                <table class="w-full text-left border-collapse">
+                    <thead class="bg-gray-100 border-b">
+                        <tr>
+                            <th class="p-4 font-semibold">Продукт</th>
+                            <th class="p-4 font-semibold">Базис / Рынок</th>
+                            <th class="p-4 font-semibold text-right">Цена</th>
+                            <th class="p-4 font-semibold text-right">Динамика</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y">
+                        <tr>
+                            <td class="p-4 font-medium italic">Sunflower Oil</td>
+                            <td class="p-4 text-gray-600">FOB Six Ports (EU)</td>
+                            <td class="p-4 text-right font-bold">$1,409.00 / т</td>
+                            <td class="p-4 text-right trend-up font-semibold">+$80.00</td>
+                        </tr>
+                        <tr>
+                            <td class="p-4 font-medium italic">Sunflower Oil</td>
+                            <td class="p-4 text-gray-600">CIF Mumbai (India)</td>
+                            <td class="p-4 text-right font-bold">$1,390 – $1,400 / т</td>
+                            <td class="p-4 text-right trend-up font-semibold">+$50.00</td>
+                        </tr>
+                        <tr>
+                            <td class="p-4 font-medium italic">Sunflower Oil</td>
+                            <td class="p-4 text-gray-600">FOB Russia</td>
+                            <td class="p-4 text-right font-bold">$1,280 – $1,290 / т</td>
+                            <td class="p-4 text-right trend-up font-semibold">+$45.00</td>
+                        </tr>
+                        <tr>
+                            <td class="p-4 font-medium italic">Palm Oil</td>
+                            <td class="p-4 text-gray-600">BMD Futures (Feb'26)</td>
+                            <td class="p-4 text-right font-bold">4,198 – 4,260 MYR / т</td>
+                            <td class="p-4 text-right trend-up font-semibold">+16 MYR</td>
+                        </tr>
+                        <tr>
+                            <td class="p-4 font-medium italic">Soybean Oil</td>
+                            <td class="p-4 text-gray-600">SWOT (Chicago)</td>
+                            <td class="p-4 text-right font-bold">$1,200.00 / т</td>
+                            <td class="p-4 text-right trend-up font-semibold">+3.6%</td>
+                        </tr>
+                        <tr>
+                            <td class="p-4 font-medium italic">Rapeseed Oil</td>
+                            <td class="p-4 text-gray-600">Euronext (Feb'26)</td>
+                            <td class="p-4 text-right font-bold">€482.25 / т</td>
+                            <td class="p-4 text-right trend-up font-semibold">+€1.25</td>
+                        </tr>
+                        <tr>
+                            <td class="p-4 font-medium italic">Olive Oil (EVOO)</td>
+                            <td class="p-4 text-gray-600">Spain (Jaén)</td>
+                            <td class="p-4 text-right font-bold">€4.50 – 5.00 / кг</td>
+                            <td class="p-4 text-right text-gray-400">Стабильно</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
 
-        <div class="p-4 border-t border-stone-100 bg-stone-50">
-            <div class="flex items-center gap-3">
-                <div class="w-8 h-8 rounded-full bg-amber-200 flex items-center justify-center text-amber-800 font-bold text-xs">AS</div>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+            <!-- Инфраструктурные риски -->
+            <section class="card p-6 bg-red-50 border border-red-100">
+                <h2 class="text-xl font-bold mb-4 text-red-800 flex items-center">
+                    <span class="mr-2">🚨</span> Инфраструктурные потери (Украина)
+                </h2>
+                <ul class="space-y-4 text-sm">
+                    <li class="flex items-start">
+                        <span class="bg-red-200 text-red-800 px-2 py-0.5 rounded mr-3 mt-0.5">Strike</span>
+                        <div>
+                            <strong>Завод Oleina (Bunge), Днепр:</strong> Удар дронов, разлив ~300 тонн готового масла.
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="bg-red-200 text-red-800 px-2 py-0.5 rounded mr-3 mt-0.5">Port</span>
+                        <div>
+                            <strong>Терминал Allseeds (Южный) & ИМЖК (Черноморск):</strong> Ограничение экспортных мощностей.
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="bg-red-200 text-red-800 px-2 py-0.5 rounded mr-3 mt-0.5">Stats</span>
+                        <div>
+                            <strong>~25% мощностей простаивают:</strong> Из-за разрушений и дефицита электроэнергии.
+                        </div>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- Регуляторные изменения -->
+            <section class="card p-6 bg-blue-50 border border-blue-100">
+                <h2 class="text-xl font-bold mb-4 text-blue-800 flex items-center">
+                    <span class="mr-2">⚖️</span> Регулирование и пошлины
+                </h2>
+                <div class="space-y-3 text-sm">
+                    <div class="p-3 bg-white rounded border border-blue-200">
+                        <p class="font-bold text-blue-900">РФ: "Подсолнечный демпфер"</p>
+                        <p>Экспортная пошлина на масло (с 01.02.2026): <strong>9,495 руб/т</strong> (+196.4 руб к январю).</p>
+                    </div>
+                    <div class="p-3 bg-white rounded border border-blue-200">
+                        <p class="font-bold text-blue-900">Узбекистан: Налоговые каникулы</p>
+                        <p>Нулевая импортная пошлина продлена до <strong>1 января 2027 года</strong>.</p>
+                    </div>
+                    <div class="p-3 bg-white rounded border border-blue-200">
+                        <p class="font-bold text-blue-900">Германия/Нидерланды: HVO</p>
+                        <p>Отмена "двойного учета" биотоплива с 01.01.2026. Ожидаемый рост потребления HVO до <strong>2.6 млрд л</strong>.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Прогноз производства 2026 -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold mb-6 flex items-center">
+                <span class="mr-2">📈</span> Прогноз производства (млн тонн)
+            </h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="card p-4 text-center">
+                    <p class="text-xs text-gray-500 font-bold uppercase">Индонезия (Palm Oil)</p>
+                    <p class="text-2xl font-bold text-emerald-600">48.0 – 50.0</p>
+                    <p class="text-[10px] text-gray-400">+1.5–2.0 млн т к 2025</p>
+                </div>
+                <div class="card p-4 text-center">
+                    <p class="text-xs text-gray-500 font-bold uppercase">Малайзия (Palm Oil)</p>
+                    <p class="text-2xl font-bold text-amber-600">19.6</p>
+                    <p class="text-[10px] text-red-400">-0.4 млн т к 2025</p>
+                </div>
+                <div class="card p-4 text-center">
+                    <p class="text-xs text-gray-500 font-bold uppercase">Россия (Sun Oil Exp)</p>
+                    <p class="text-2xl font-bold text-blue-600">5.2 – 5.3</p>
+                    <p class="text-[10px] text-gray-400">Рост на 0.1–0.2 млн т</p>
+                </div>
+                <div class="card p-4 text-center">
+                    <p class="text-xs text-gray-500 font-bold uppercase">Мир (Рапсовое масло)</p>
+                    <p class="text-2xl font-bold text-slate-700">33.0</p>
+                    <p class="text-[10px] text-gray-400">Прогноз производства</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Выводы из отчета -->
+        <footer class="bg-slate-100 p-8 rounded-xl border border-slate-200">
+            <h2 class="text-lg font-bold mb-4 uppercase tracking-widest text-slate-600">Ключевые выводы отчета</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm text-slate-700">
                 <div>
-                    <p class="text-xs font-bold text-stone-700">Analyst Services</p>
-                    <p class="text-[10px] text-stone-500">Premium Report</p>
+                    <h4 class="font-bold mb-1">Прогноз цен</h4>
+                    Цены на подсолнечное масло выше $1,300/т сохранятся в течение Q1 2026 из-за дефицита в Черноморском регионе.
+                </div>
+                <div>
+                    <h4 class="font-bold mb-1">Энергетический спрос</h4>
+                    Новые правила биотоплива в ЕС создадут «ценовую подушку» для рапсового и пальмового масел во втором полугодии.
+                </div>
+                <div>
+                    <h4 class="font-bold mb-1">Центральная Азия</h4>
+                    Регион (особенно Узбекистан) становится перспективным хабом глубокой переработки масличных культур.
                 </div>
             </div>
-        </div>
-    </aside>
-
-    <!-- Main Content -->
-    <main class="flex-1 flex flex-col h-screen overflow-hidden relative">
-        <!-- Mobile Header -->
-        <header class="md:hidden bg-white border-b border-stone-200 p-4 flex justify-between items-center z-30">
-            <h1 class="font-bold text-stone-900"><i class="fa-solid fa-droplet text-amber-500 mr-2"></i>MarketSight</h1>
-            <button onclick="toggleMobileNav()" class="text-stone-600 focus:outline-none">
-                <i class="fa-solid fa-bars text-xl"></i>
-            </button>
-        </header>
-
-        <!-- Mobile Nav Overlay -->
-        <div id="mobile-nav" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden" onclick="toggleMobileNav()">
-            <div class="bg-white w-64 h-full p-4 flex flex-col" onclick="event.stopPropagation()">
-                <div class="flex justify-between items-center mb-6">
-                    <h2 class="font-bold">Menu</h2>
-                    <button onclick="toggleMobileNav()"><i class="fa-solid fa-xmark"></i></button>
-                </div>
-                <nav class="space-y-2">
-                    <button onclick="navigate('summary'); toggleMobileNav()" class="block w-full text-left p-3 hover:bg-stone-100 rounded">Executive Summary</button>
-                    <button onclick="navigate('prices'); toggleMobileNav()" class="block w-full text-left p-3 hover:bg-stone-100 rounded">Price Dynamics</button>
-                    <button onclick="navigate('production'); toggleMobileNav()" class="block w-full text-left p-3 hover:bg-stone-100 rounded">Production & Flows</button>
-                    <button onclick="navigate('logistics'); toggleMobileNav()" class="block w-full text-left p-3 hover:bg-stone-100 rounded">Logistics & Risks</button>
-                    <button onclick="navigate('policy'); toggleMobileNav()" class="block w-full text-left p-3 hover:bg-stone-100 rounded">Policy & Regulation</button>
-                    <button onclick="navigate('countries'); toggleMobileNav()" class="block w-full text-left p-3 hover:bg-stone-100 rounded">Country Focus</button>
-                </nav>
-            </div>
-        </div>
-
-        <!-- Scrollable Content Area -->
-        <div id="content-area" class="flex-1 overflow-y-auto p-4 md:p-8">
-            
-            <!-- SECTION: EXECUTIVE SUMMARY -->
-            <div id="summary" class="view-section fade-in">
-                <div class="mb-8">
-                    <h2 class="text-3xl font-bold text-stone-800 mb-2">Executive Summary</h2>
-                    <p class="text-stone-500">Weekly Overview: Jan 26 - Feb 2, 2026</p>
-                </div>
-
-                <!-- Intro Context Paragraph -->
-                <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-200 mb-8 max-w-4xl">
-                    <p class="text-stone-700 leading-relaxed">
-                        The vegetable oils market witnessed mixed volatility this week. While <strong>Sunflower Oil (FOB Black Sea)</strong> maintained its premium due to constrained crushing volumes in Ukraine, <strong>Palm Oil</strong> futures retreated slightly on improved production forecasts from Malaysia. In Europe, logistical bottlenecks persist at the German-Polish border, affecting rapeseed oil transit. Policy discussions are dominated by the delayed implementation nuances of the <strong>EU Deforestation Regulation (EUDR)</strong>, creating uncertainty for importers in Rotterdam and Hamburg.
-                    </p>
-                </div>
-
-                <!-- KPI Cards -->
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-                    <div class="bg-white p-5 rounded-lg border border-stone-200 shadow-sm hover:shadow-md transition-shadow">
-                        <div class="flex justify-between items-start mb-2">
-                            <span class="text-xs font-bold text-stone-400 uppercase">Global Price Index</span>
-                            <span class="text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded text-xs font-bold">+1.2%</span>
-                        </div>
-                        <h3 class="text-2xl font-bold text-stone-800">1,145 USD</h3>
-                        <p class="text-xs text-stone-500 mt-1">Weighted Avg / MT</p>
-                    </div>
-
-                    <div class="bg-white p-5 rounded-lg border border-stone-200 shadow-sm hover:shadow-md transition-shadow">
-                        <div class="flex justify-between items-start mb-2">
-                            <span class="text-xs font-bold text-stone-400 uppercase">Volatility</span>
-                            <span class="text-amber-600 bg-amber-50 px-2 py-0.5 rounded text-xs font-bold">High</span>
-                        </div>
-                        <h3 class="text-2xl font-bold text-stone-800">High</h3>
-                        <p class="text-xs text-stone-500 mt-1">Driven by Palm Oil futures</p>
-                    </div>
-
-                    <div class="bg-white p-5 rounded-lg border border-stone-200 shadow-sm hover:shadow-md transition-shadow">
-                        <div class="flex justify-between items-start mb-2">
-                            <span class="text-xs font-bold text-stone-400 uppercase">Logistics Status</span>
-                            <span class="text-rose-600 bg-rose-50 px-2 py-0.5 rounded text-xs font-bold">Alert</span>
-                        </div>
-                        <h3 class="text-2xl font-bold text-stone-800">Bottleneck</h3>
-                        <p class="text-xs text-stone-500 mt-1">PL-DE Border & Red Sea</p>
-                    </div>
-
-                    <div class="bg-white p-5 rounded-lg border border-stone-200 shadow-sm hover:shadow-md transition-shadow">
-                        <div class="flex justify-between items-start mb-2">
-                            <span class="text-xs font-bold text-stone-400 uppercase">Ending Stocks</span>
-                            <span class="text-stone-600 bg-stone-100 px-2 py-0.5 rounded text-xs font-bold">-0.5%</span>
-                        </div>
-                        <h3 class="text-2xl font-bold text-stone-800">Tightening</h3>
-                        <p class="text-xs text-stone-500 mt-1">EU Rapeseed stocks down</p>
-                    </div>
-                </div>
-
-                <!-- Snapshot Chart -->
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                    <div class="lg:col-span-2 bg-white p-6 rounded-xl border border-stone-200 shadow-sm">
-                        <h3 class="text-lg font-bold text-stone-800 mb-4">Market Sentiment Map</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <!-- Sentiment Items -->
-                            <div class="flex items-center p-3 bg-stone-50 rounded border border-stone-100">
-                                <div class="w-2 h-12 bg-emerald-500 rounded mr-3"></div>
-                                <div>
-                                    <h4 class="font-bold text-sm">Sunflower Oil</h4>
-                                    <p class="text-xs text-stone-500">Bullish trend due to supply constraints in Black Sea region.</p>
-                                </div>
-                            </div>
-                            <div class="flex items-center p-3 bg-stone-50 rounded border border-stone-100">
-                                <div class="w-2 h-12 bg-rose-500 rounded mr-3"></div>
-                                <div>
-                                    <h4 class="font-bold text-sm">Rapeseed Oil</h4>
-                                    <p class="text-xs text-stone-500">Bearish pressure from abundant Canadian canola imports to EU.</p>
-                                </div>
-                            </div>
-                            <div class="flex items-center p-3 bg-stone-50 rounded border border-stone-100">
-                                <div class="w-2 h-12 bg-amber-500 rounded mr-3"></div>
-                                <div>
-                                    <h4 class="font-bold text-sm">Palm Oil</h4>
-                                    <p class="text-xs text-stone-500">Neutral/Volatile. Waiting on Feb 1-15 export data.</p>
-                                </div>
-                            </div>
-                            <div class="flex items-center p-3 bg-stone-50 rounded border border-stone-100">
-                                <div class="w-2 h-12 bg-blue-500 rounded mr-3"></div>
-                                <div>
-                                    <h4 class="font-bold text-sm">Soybean Oil</h4>
-                                    <p class="text-xs text-stone-500">Stable demand from biodiesel sector in Americas.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="bg-white p-6 rounded-xl border border-stone-200 shadow-sm">
-                        <h3 class="text-lg font-bold text-stone-800 mb-4">Quick Links</h3>
-                        <ul class="space-y-3">
-                            <li onclick="navigate('policy')" class="cursor-pointer hover:text-amber-600 transition flex items-center justify-between p-2 rounded hover:bg-stone-50">
-                                <span class="text-sm font-medium">EUDR Updates</span>
-                                <i class="fa-solid fa-chevron-right text-xs text-stone-400"></i>
-                            </li>
-                            <li onclick="navigate('logistics')" class="cursor-pointer hover:text-amber-600 transition flex items-center justify-between p-2 rounded hover:bg-stone-50">
-                                <span class="text-sm font-medium">War Risk Insurance</span>
-                                <i class="fa-solid fa-chevron-right text-xs text-stone-400"></i>
-                            </li>
-                            <li onclick="navigate('countries')" class="cursor-pointer hover:text-amber-600 transition flex items-center justify-between p-2 rounded hover:bg-stone-50">
-                                <span class="text-sm font-medium">Central Asian Tariffs</span>
-                                <i class="fa-solid fa-chevron-right text-xs text-stone-400"></i>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- SECTION: PRICES -->
-            <div id="prices" class="view-section hidden fade-in">
-                <div class="mb-6">
-                    <h2 class="text-3xl font-bold text-stone-800 mb-2">Price Dynamics</h2>
-                    <p class="text-stone-500">Spot & Futures Analysis (USD/MT)</p>
-                </div>
-
-                <div class="bg-white p-6 rounded-xl border border-stone-200 shadow-sm mb-6">
-                    <p class="text-sm text-stone-600 mb-4 max-w-3xl">
-                        The chart below illustrates the divergent trends in the market. <strong>Sunflower Oil (FOB Black Sea)</strong> has decoupled from the wider vegetable oil complex, gaining value as crushing plants in Ukraine operate below capacity due to energy infrastructure risks. Conversely, <strong>Palm Oil (CIF Rotterdam)</strong> has seen a correction following high prices in early January.
-                    </p>
-                    
-                    <div class="chart-container">
-                        <canvas id="priceChart"></canvas>
-                    </div>
-                    
-                    <div class="flex flex-wrap gap-2 mt-4 justify-center">
-                        <button onclick="toggleDataset(0)" class="px-3 py-1 text-xs font-bold rounded-full bg-yellow-100 text-yellow-800 border border-yellow-200 hover:bg-yellow-200">Sunflower Oil</button>
-                        <button onclick="toggleDataset(1)" class="px-3 py-1 text-xs font-bold rounded-full bg-orange-100 text-orange-800 border border-orange-200 hover:bg-orange-200">Palm Oil</button>
-                        <button onclick="toggleDataset(2)" class="px-3 py-1 text-xs font-bold rounded-full bg-green-100 text-green-800 border border-green-200 hover:bg-green-200">Soybean Oil</button>
-                        <button onclick="toggleDataset(3)" class="px-3 py-1 text-xs font-bold rounded-full bg-blue-100 text-blue-800 border border-blue-200 hover:bg-blue-200">Rapeseed Oil</button>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <div class="bg-white p-6 rounded-xl border border-stone-200 shadow-sm">
-                        <h3 class="font-bold text-stone-800 mb-3 border-b border-stone-100 pb-2">Price Spread Analysis</h3>
-                        <div class="space-y-4">
-                            <div>
-                                <div class="flex justify-between text-sm mb-1">
-                                    <span class="text-stone-600">Sun Oil vs Palm Oil Premium</span>
-                                    <span class="font-bold text-stone-800">$120/MT</span>
-                                </div>
-                                <div class="w-full bg-stone-100 rounded-full h-2">
-                                    <div class="bg-amber-500 h-2 rounded-full" style="width: 75%"></div>
-                                </div>
-                                <p class="text-xs text-stone-400 mt-1">Widening spread favors Palm Oil blending.</p>
-                            </div>
-                            <div>
-                                <div class="flex justify-between text-sm mb-1">
-                                    <span class="text-stone-600">Rape Oil vs Sun Oil Discount</span>
-                                    <span class="font-bold text-stone-800">-$35/MT</span>
-                                </div>
-                                <div class="w-full bg-stone-100 rounded-full h-2">
-                                    <div class="bg-blue-500 h-2 rounded-full" style="width: 40%"></div>
-                                </div>
-                                <p class="text-xs text-stone-400 mt-1">Rapeseed competitive for EU biodiesel.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="bg-white p-6 rounded-xl border border-stone-200 shadow-sm">
-                        <h3 class="font-bold text-stone-800 mb-3 border-b border-stone-100 pb-2">Regional Pricing Table (USD/MT)</h3>
-                        <div class="overflow-x-auto">
-                            <table class="w-full text-sm text-left">
-                                <thead class="text-xs text-stone-500 uppercase bg-stone-50">
-                                    <tr>
-                                        <th class="px-4 py-2">Origin</th>
-                                        <th class="px-4 py-2">Product</th>
-                                        <th class="px-4 py-2">Price</th>
-                                        <th class="px-4 py-2">Change</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="divide-y divide-stone-100">
-                                    <tr>
-                                        <td class="px-4 py-2 font-medium">Ukraine (CPT)</td>
-                                        <td class="px-4 py-2">Sunflower Oil</td>
-                                        <td class="px-4 py-2">890-905</td>
-                                        <td class="px-4 py-2 text-emerald-600">▲ 1.5%</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="px-4 py-2 font-medium">Rotterdam (CIF)</td>
-                                        <td class="px-4 py-2">Palm Oil</td>
-                                        <td class="px-4 py-2">945-950</td>
-                                        <td class="px-4 py-2 text-rose-600">▼ 0.8%</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="px-4 py-2 font-medium">Kazakhstan (DAP)</td>
-                                        <td class="px-4 py-2">Sunflower Oil</td>
-                                        <td class="px-4 py-2">840-850</td>
-                                        <td class="px-4 py-2 text-stone-500">- 0.0%</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- SECTION: PRODUCTION & FLOWS -->
-            <div id="production" class="view-section hidden fade-in">
-                <div class="mb-6">
-                    <h2 class="text-3xl font-bold text-stone-800 mb-2">Production & Trade Flows</h2>
-                    <p class="text-stone-500">Crush Volumes & Export Statistics</p>
-                </div>
-
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
-                    <!-- Chart Column -->
-                    <div class="lg:col-span-2 bg-white p-6 rounded-xl border border-stone-200 shadow-sm">
-                        <div class="flex justify-between items-center mb-4">
-                            <h3 class="font-bold text-stone-800">Crushing Volume: Selected Regions (Jan 2026 Est.)</h3>
-                        </div>
-                         <!-- Context for Production -->
-                        <p class="text-sm text-stone-600 mb-4">
-                            Crushing activity in the <strong>EU-27</strong> remains robust for Rapeseed, driven by local harvest availability. However, <strong>Ukraine's</strong> Sunflower crush is down 12% YoY for the same period due to energy instability affecting plant operations in the Odessa and Mykolaiv regions.
-                        </p>
-                        <div class="chart-container">
-                            <canvas id="productionChart"></canvas>
-                        </div>
-                    </div>
-
-                    <!-- Trade Highlights -->
-                    <div class="space-y-4">
-                        <div class="bg-amber-50 p-5 rounded-xl border border-amber-100">
-                            <h4 class="text-amber-800 font-bold mb-2"><i class="fa-solid fa-ship mr-2"></i>Export Hub: Black Sea</h4>
-                            <p class="text-sm text-amber-900">
-                                Trade volume through the "Humanitarian Corridor" remains steady at 220k MT/week for all ag products. Vegetable oil tankers facing 4-day queues at inspection points.
-                            </p>
-                        </div>
-                        <div class="bg-blue-50 p-5 rounded-xl border border-blue-100">
-                            <h4 class="text-blue-800 font-bold mb-2"><i class="fa-solid fa-train mr-2"></i>Rail Transit: Central Asia</h4>
-                            <p class="text-sm text-blue-900">
-                                Uzbekistan reports a 15% increase in Sunflower oil imports from Kazakhstan via rail, substituting Russian volumes due to tariff adjustments.
-                            </p>
-                        </div>
-                        <div class="bg-white p-5 rounded-xl border border-stone-200 shadow-sm">
-                            <h4 class="text-stone-800 font-bold mb-2">Ending Stocks (EU)</h4>
-                            <ul class="text-sm space-y-2">
-                                <li class="flex justify-between border-b border-stone-100 pb-1">
-                                    <span>Sunflower Oil</span>
-                                    <span class="font-bold">Low</span>
-                                </li>
-                                <li class="flex justify-between border-b border-stone-100 pb-1">
-                                    <span>Rapeseed Oil</span>
-                                    <span class="font-bold">Adequate</span>
-                                </li>
-                                <li class="flex justify-between">
-                                    <span>Palm Oil</span>
-                                    <span class="font-bold">Tight</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- SECTION: LOGISTICS & WAR RISKS -->
-            <div id="logistics" class="view-section hidden fade-in">
-                <div class="mb-6">
-                    <h2 class="text-3xl font-bold text-stone-800 mb-2">Logistics & War Risks</h2>
-                    <p class="text-stone-500">Infrastructure Alerts & Risk Assessment</p>
-                </div>
-
-                <!-- Intro -->
-                <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-200 mb-8">
-                    <p class="text-stone-700">
-                        War risks in the Black Sea region continue to dictate insurance premiums, which have stabilized at <strong>0.75-0.9% of cargo value</strong>. Meanwhile, Western borders of Ukraine face intermittent blockades by farmers in Poland, slowing road transport of bottled oils.
-                    </p>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <!-- Risk Card 1 -->
-                    <div class="bg-white rounded-xl border-l-4 border-rose-500 shadow-sm overflow-hidden group">
-                        <div class="p-6">
-                            <div class="flex justify-between items-start mb-4">
-                                <h3 class="font-bold text-lg">Black Sea Corridor</h3>
-                                <i class="fa-solid fa-anchor text-rose-500 bg-rose-50 p-2 rounded-full"></i>
-                            </div>
-                            <div class="mb-4">
-                                <span class="text-xs font-bold text-white bg-rose-500 px-2 py-1 rounded">HIGH RISK</span>
-                                <span class="text-xs font-bold text-stone-500 ml-2">Odessa / Chornomorsk</span>
-                            </div>
-                            <p class="text-sm text-stone-600">
-                                Sporadic drone alerts caused 12-hour operational pauses at terminals on Jan 28 and Jan 30. Loading speeds reduced by 15%.
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- Risk Card 2 -->
-                    <div class="bg-white rounded-xl border-l-4 border-amber-500 shadow-sm overflow-hidden group">
-                        <div class="p-6">
-                            <div class="flex justify-between items-start mb-4">
-                                <h3 class="font-bold text-lg">PL-UA Border Crossings</h3>
-                                <i class="fa-solid fa-truck text-amber-500 bg-amber-50 p-2 rounded-full"></i>
-                            </div>
-                            <div class="mb-4">
-                                <span class="text-xs font-bold text-white bg-amber-500 px-2 py-1 rounded">DELAYED</span>
-                                <span class="text-xs font-bold text-stone-500 ml-2">Dorohusk / Yahodyn</span>
-                            </div>
-                            <p class="text-sm text-stone-600">
-                                Customs clearance time for tank trucks increased to 6 days (previously 4). Rail transit for bulk oil remains unaffected.
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- Risk Card 3 -->
-                    <div class="bg-white rounded-xl border-l-4 border-emerald-500 shadow-sm overflow-hidden group">
-                        <div class="p-6">
-                            <div class="flex justify-between items-start mb-4">
-                                <h3 class="font-bold text-lg">Central Asian Rail</h3>
-                                <i class="fa-solid fa-train text-emerald-500 bg-emerald-50 p-2 rounded-full"></i>
-                            </div>
-                            <div class="mb-4">
-                                <span class="text-xs font-bold text-white bg-emerald-500 px-2 py-1 rounded">STABLE</span>
-                                <span class="text-xs font-bold text-stone-500 ml-2">Kuryk / Baku</span>
-                            </div>
-                            <p class="text-sm text-stone-600">
-                                Trans-Caspian route functioning efficiently. Ferry capacity from Kuryk (Kazakhstan) to Baku (Azerbaijan) utilized at 85%.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- War Risk Rates Table -->
-                <div class="mt-8 bg-white rounded-xl shadow-sm border border-stone-200 overflow-hidden">
-                    <div class="bg-stone-50 px-6 py-4 border-b border-stone-200">
-                        <h3 class="font-bold text-stone-800">Insurance & Freight Rates (Snapshot)</h3>
-                    </div>
-                    <table class="w-full text-sm text-left">
-                        <thead class="bg-white text-stone-500 border-b border-stone-100">
-                            <tr>
-                                <th class="px-6 py-3">Route</th>
-                                <th class="px-6 py-3">Freight (USD/MT)</th>
-                                <th class="px-6 py-3">Insurance Trend</th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-stone-100">
-                            <tr>
-                                <td class="px-6 py-4">Chornomorsk -> Mersin (Turkey)</td>
-                                <td class="px-6 py-4 font-bold text-stone-800">38-42</td>
-                                <td class="px-6 py-4"><span class="text-stone-500">Stable</span></td>
-                            </tr>
-                            <tr>
-                                <td class="px-6 py-4">Chornomorsk -> Barcelona (Spain)</td>
-                                <td class="px-6 py-4 font-bold text-stone-800">75-80</td>
-                                <td class="px-6 py-4"><span class="text-rose-500">Rising (Red Sea impact)</span></td>
-                            </tr>
-                            <tr>
-                                <td class="px-6 py-4">Constanta -> Rotterdam</td>
-                                <td class="px-6 py-4 font-bold text-stone-800">55-60</td>
-                                <td class="px-6 py-4"><span class="text-emerald-500">Declining</span></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- SECTION: POLICY & REGULATION -->
-            <div id="policy" class="view-section hidden fade-in">
-                <div class="mb-6">
-                    <h2 class="text-3xl font-bold text-stone-800 mb-2">Policy & Regulatory Changes</h2>
-                    <p class="text-stone-500">Analysis of regulatory shifts in EU and Central Asia</p>
-                </div>
-
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                    <!-- Main Policy Analysis Column -->
-                    <div class="lg:col-span-2 space-y-4">
-                         <!-- Policy Intro -->
-                        <div class="bg-white p-6 rounded-xl border border-stone-200">
-                            <h3 class="text-lg font-bold text-stone-800 mb-3">Extended Analysis: Impact of Regulation</h3>
-                            <p class="text-stone-700 mb-4">
-                                The regulatory landscape in early 2026 is defined by two major axes: the implementation hurdles of the <strong>European Green Deal</strong> components (specifically EUDR) and the <strong>protectionist measures</strong> emerging in Central Asia to secure domestic food security.
-                            </p>
-                        </div>
-
-                        <!-- Accordion Items -->
-                        <div class="bg-white rounded-xl border border-stone-200 overflow-hidden">
-                            <button class="w-full text-left p-4 bg-stone-50 hover:bg-stone-100 font-bold flex justify-between items-center" onclick="toggleAccordion('pol1')">
-                                <span><i class="fa-solid fa-flag-checkered text-blue-600 mr-2"></i> EU Deforestation Regulation (EUDR) - Compliance Update</span>
-                                <i class="fa-solid fa-chevron-down text-stone-400 transform transition-transform" id="icon-pol1"></i>
-                            </button>
-                            <div id="pol1" class="hidden p-6 border-t border-stone-200 bg-white">
-                                <p class="text-sm text-stone-600 mb-3">
-                                    <strong>Context:</strong> As of Jan 2026, full compliance is mandatory for large operators. 
-                                </p>
-                                <p class="text-sm text-stone-600">
-                                    <strong>Current Event:</strong> Importers in the Netherlands are reporting delays in IT system integration for "Due Diligence Statements". Several shipments of Palm Oil derivatives from Indonesia are currently held in bonded warehouses awaiting geo-location verification clearance.
-                                </p>
-                                <div class="mt-3 inline-block bg-blue-50 text-blue-700 text-xs px-2 py-1 rounded font-bold">Impact: High for Importers</div>
-                            </div>
-                        </div>
-
-                        <div class="bg-white rounded-xl border border-stone-200 overflow-hidden">
-                            <button class="w-full text-left p-4 bg-stone-50 hover:bg-stone-100 font-bold flex justify-between items-center" onclick="toggleAccordion('pol2')">
-                                <span><i class="fa-solid fa-coins text-amber-600 mr-2"></i> Uzbekistan: VAT Reform on Imported Oils</span>
-                                <i class="fa-solid fa-chevron-down text-stone-400 transform transition-transform" id="icon-pol2"></i>
-                            </button>
-                            <div id="pol2" class="hidden p-6 border-t border-stone-200 bg-white">
-                                <p class="text-sm text-stone-600 mb-3">
-                                    <strong>Context:</strong> Uzbekistan aims to support local sunflower crushing.
-                                </p>
-                                <p class="text-sm text-stone-600">
-                                    <strong>Current Event:</strong> The Ministry of Economy proposed reinstating a 12% VAT on imported bottled sunflower oil, previously exempted. Bulk crude oil imports for local refining retain zero-rated status. This shift favors importing raw material over finished goods.
-                                </p>
-                                <div class="mt-3 inline-block bg-amber-50 text-amber-700 text-xs px-2 py-1 rounded font-bold">Impact: Shift to Crude Imports</div>
-                            </div>
-                        </div>
-
-                        <div class="bg-white rounded-xl border border-stone-200 overflow-hidden">
-                            <button class="w-full text-left p-4 bg-stone-50 hover:bg-stone-100 font-bold flex justify-between items-center" onclick="toggleAccordion('pol3')">
-                                <span><i class="fa-solid fa-ban text-rose-600 mr-2"></i> Kazakhstan: Export Quota Review</span>
-                                <i class="fa-solid fa-chevron-down text-stone-400 transform transition-transform" id="icon-pol3"></i>
-                            </button>
-                            <div id="pol3" class="hidden p-6 border-t border-stone-200 bg-white">
-                                <p class="text-sm text-stone-600 mb-3">
-                                    <strong>Context:</strong> Monthly review of export limits.
-                                </p>
-                                <p class="text-sm text-stone-600">
-                                    <strong>Current Event:</strong> The Ministry of Agriculture confirmed the export quota for Sunflower Seed will remain at 20% of historical production for February 2026. No restrictions on Sunflower Oil exports, encouraging value-added processing.
-                                </p>
-                                <div class="mt-3 inline-block bg-stone-100 text-stone-600 text-xs px-2 py-1 rounded font-bold">Impact: Stable</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Side Note -->
-                    <div class="bg-stone-800 text-white p-6 rounded-xl shadow-lg">
-                        <h4 class="font-bold mb-3">Focus: Biofuel Mandates</h4>
-                        <p class="text-sm opacity-80 mb-4">
-                            Germany is debating a reduction in the cap for crop-based biofuels for Q2 2026. If passed, this could reduce demand for Rapeseed Oil by an estimated 50,000 MT/month.
-                        </p>
-                        <div class="w-full h-1 bg-stone-600 rounded mb-2 overflow-hidden">
-                            <div class="h-full bg-amber-500 w-2/3"></div>
-                        </div>
-                        <p class="text-xs opacity-60">Probability of enactment: 65%</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- SECTION: COUNTRY FOCUS -->
-            <div id="countries" class="view-section hidden fade-in">
-                <div class="mb-6">
-                    <h2 class="text-3xl font-bold text-stone-800 mb-2">Country Specifics</h2>
-                    <p class="text-stone-500">Deep dive into market conditions by nation</p>
-                </div>
-
-                <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-200 mb-8">
-                     <p class="text-stone-700 mb-4">Select a country to view specific pricing, production data, and local market notes for the week.</p>
-                    
-                    <label for="countrySelect" class="block text-sm font-medium text-stone-700 mb-2">Select Market:</label>
-                    <select id="countrySelect" onchange="updateCountryView()" class="block w-full md:w-1/3 p-2.5 bg-stone-50 border border-stone-300 text-stone-900 text-sm rounded-lg focus:ring-amber-500 focus:border-amber-500">
-                        <option value="Ukraine">Ukraine</option>
-                        <option value="Russia">Russia</option>
-                        <option value="Kazakhstan">Kazakhstan</option>
-                        <option value="Poland">Poland</option>
-                        <option value="Germany">Germany</option>
-                        <option value="Turkey">Turkey (Transit)</option>
-                        <option value="Uzbekistan">Uzbekistan</option>
-                        <option value="Romania">Romania</option>
-                        <option value="Bulgaria">Bulgaria</option>
-                        <option value="France">France</option>
-                    </select>
-                </div>
-
-                <div id="countryCard" class="bg-white rounded-xl shadow-lg border border-stone-100 overflow-hidden fade-in">
-                    <!-- Dynamic Content Injected Here -->
-                </div>
-            </div>
-
-        </div>
+        </footer>
     </main>
 
-    <script>
-        // --- DATA STORAGE ---
-        // Simulating the report data structure
-        const priceData = {
-            labels: ['Jan 26', 'Jan 27', 'Jan 28', 'Jan 29', 'Jan 30', 'Jan 31', 'Feb 1', 'Feb 2'],
-            datasets: [
-                {
-                    label: 'Sunflower Oil (FOB Black Sea)',
-                    data: [885, 888, 890, 892, 895, 898, 900, 905],
-                    borderColor: '#fbbf24', // amber-400
-                    backgroundColor: 'rgba(251, 191, 36, 0.1)',
-                    borderWidth: 2,
-                    tension: 0.3,
-                    fill: true,
-                    hidden: false
-                },
-                {
-                    label: 'Palm Oil (CIF Rotterdam)',
-                    data: [960, 955, 950, 948, 945, 940, 942, 945],
-                    borderColor: '#f97316', // orange-500
-                    borderWidth: 2,
-                    tension: 0.3,
-                    hidden: false
-                },
-                {
-                    label: 'Soybean Oil (FOB Argentina)',
-                    data: [810, 812, 815, 810, 808, 805, 805, 810],
-                    borderColor: '#22c55e', // green-500
-                    borderWidth: 2,
-                    tension: 0.3,
-                    hidden: false
-                },
-                {
-                    label: 'Rapeseed Oil (FOB Dutch Mill)',
-                    data: [920, 918, 915, 910, 905, 900, 895, 890],
-                    borderColor: '#3b82f6', // blue-500
-                    borderWidth: 2,
-                    tension: 0.3,
-                    hidden: false
-                }
-            ]
-        };
-
-        const productionData = {
-            labels: ['Ukraine', 'Russia', 'EU-27', 'Argentina', 'Turkey'],
-            datasets: [{
-                label: 'Crush Volume (1000 MT) - Weekly Est.',
-                data: [280, 310, 450, 600, 120],
-                backgroundColor: [
-                    '#fbbf24', // UA (Sun)
-                    '#a8a29e', // RU
-                    '#3b82f6', // EU (Rape)
-                    '#22c55e', // ARG (Soy)
-                    '#f87171'  // TR
-                ],
-                borderRadius: 4
-            }]
-        };
-
-        const countryDetails = {
-            "Ukraine": {
-                flag: "🇺🇦",
-                focus: "Export Logistics & Production",
-                price: "$890-905 FOB",
-                trend: "Rising",
-                notes: "Crushing margins improved slightly. Farmers holding seed stocks anticipating higher prices in March. Energy grid stability in Odessa region is the primary operational risk."
-            },
-            "Russia": {
-                flag: "🇷🇺",
-                focus: "Export Taxes & Trade",
-                price: "$820-830 FOB",
-                trend: "Stable",
-                notes: "Export duty on sunflower oil remains zero for February. High volumes flowing to India and China. Domestic stocks are high."
-            },
-            "Kazakhstan": {
-                flag: "🇰🇿",
-                focus: "Regional Trade",
-                price: "$840 DAP",
-                trend: "Neutral",
-                notes: "Active trade with Uzbekistan and Tajikistan. Rail wagon availability has improved compared to December 2025."
-            },
-            "Poland": {
-                flag: "🇵🇱",
-                focus: "Transit & Borders",
-                price: "€880 DDP",
-                trend: "Falling",
-                notes: "High inventory of rapeseed oil. Farmers protesting Ukrainian transit, causing delays at Dorohusk. Biodiesel demand sluggish."
-            },
-            "Germany": {
-                flag: "🇩🇪",
-                focus: "Biodiesel Demand",
-                price: "€910 DDP",
-                trend: "Falling",
-                notes: "Major buyer of Rape oil. Market waiting on legislative updates regarding biofuel caps. Rhine water levels normal for logistics."
-            },
-            "Uzbekistan": {
-                flag: "🇺🇿",
-                focus: "Import Demand",
-                price: "$980 CIP",
-                trend: "Stable",
-                notes: "Demand remains strong. Government reviewing VAT policies. Shift towards importing bulk oil for local bottling rather than finished bottles."
-            },
-            "Turkey": {
-                flag: "🇹🇷",
-                focus: "Processing & Transit",
-                price: "$910 CIF",
-                trend: "Rising",
-                notes: "Key transit hub for Black Sea oil. Refineries running at 80% capacity. Re-export demand to Middle East is active."
-            },
-            "Romania": {
-                flag: "🇷🇴",
-                focus: "Constanta Port",
-                price: "$900 FOB",
-                trend: "Rising",
-                notes: "Constanta port operating at peak. High inflow of Ukrainian grain and oil via barges on Danube."
-            },
-            "Bulgaria": {
-                flag: "🇧🇬",
-                focus: "Regional Production",
-                price: "$895 FOB",
-                trend: "Rising",
-                notes: "Following Black Sea trends. Local sunseed prices increasing."
-            },
-            "France": {
-                flag: "🇫🇷",
-                focus: "Rapeseed Market",
-                price: "€905 FOB",
-                trend: "Falling",
-                notes: "Heavy competition from Canadian Canola imports into the EU affects local rapeseed oil pricing."
-            }
-        };
-
-        // --- CHART OBJECTS ---
-        let priceChartInstance = null;
-        let productionChartInstance = null;
-
-        // --- INITIALIZATION ---
-        document.addEventListener('DOMContentLoaded', () => {
-            renderCharts();
-            updateCountryView(); // Load default country
-        });
-
-        // --- NAVIGATION LOGIC ---
-        function navigate(viewId) {
-            // Hide all sections
-            document.querySelectorAll('.view-section').forEach(el => {
-                el.classList.add('hidden');
-            });
-            
-            // Show selected section
-            const target = document.getElementById(viewId);
-            if(target) target.classList.remove('hidden');
-
-            // Update Nav State
-            document.querySelectorAll('.nav-item').forEach(el => {
-                el.classList.remove('active');
-                if(el.getAttribute('onclick').includes(viewId)) {
-                    el.classList.add('active');
-                }
-            });
-
-            // Refresh charts if they become visible (fix chart.js sizing issues in hidden tabs)
-            if (viewId === 'prices' && priceChartInstance) {
-                priceChartInstance.resize();
-            }
-            if (viewId === 'production' && productionChartInstance) {
-                productionChartInstance.resize();
-            }
-
-            // Scroll top
-            document.getElementById('content-area').scrollTop = 0;
-        }
-
-        function toggleMobileNav() {
-            const nav = document.getElementById('mobile-nav');
-            nav.classList.toggle('hidden');
-        }
-
-        function toggleAccordion(id) {
-            const content = document.getElementById(id);
-            const icon = document.getElementById('icon-' + id);
-            content.classList.toggle('hidden');
-            
-            if (content.classList.contains('hidden')) {
-                icon.classList.remove('rotate-180');
-            } else {
-                icon.classList.add('rotate-180');
-            }
-        }
-
-        // --- CHART RENDERING ---
-        function renderCharts() {
-            // Price Chart
-            const ctxPrice = document.getElementById('priceChart').getContext('2d');
-            priceChartInstance = new Chart(ctxPrice, {
-                type: 'line',
-                data: priceData,
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    interaction: {
-                        mode: 'index',
-                        intersect: false,
-                    },
-                    plugins: {
-                        legend: {
-                            position: 'bottom',
-                            labels: { usePointStyle: true }
-                        },
-                        tooltip: {
-                            backgroundColor: '#fff',
-                            titleColor: '#1c1917',
-                            bodyColor: '#44403c',
-                            borderColor: '#e7e5e4',
-                            borderWidth: 1,
-                            callbacks: {
-                                label: function(context) {
-                                    return context.dataset.label + ': $' + context.parsed.y;
-                                }
-                            }
-                        }
-                    },
-                    scales: {
-                        y: {
-                            beginAtZero: false,
-                            grid: { color: '#f5f5f4' }
-                        },
-                        x: {
-                            grid: { display: false }
-                        }
-                    }
-                }
-            });
-
-            // Production Chart
-            const ctxProd = document.getElementById('productionChart').getContext('2d');
-            productionChartInstance = new Chart(ctxProd, {
-                type: 'bar',
-                data: productionData,
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: { display: false }
-                    },
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            grid: { color: '#f5f5f4' }
-                        },
-                        x: {
-                            grid: { display: false }
-                        }
-                    }
-                }
-            });
-        }
-
-        function toggleDataset(index) {
-            const meta = priceChartInstance.getDatasetMeta(index);
-            meta.hidden = meta.hidden === null ? !priceChartInstance.data.datasets[index].hidden : null;
-            priceChartInstance.update();
-        }
-
-        // --- COUNTRY VIEW LOGIC ---
-        function updateCountryView() {
-            const select = document.getElementById('countrySelect');
-            const country = select.value;
-            const data = countryDetails[country] || countryDetails['Ukraine'];
-
-            const html = `
-                <div class="flex flex-col md:flex-row">
-                    <div class="bg-stone-50 p-6 md:w-1/3 border-r border-stone-100 flex flex-col items-center justify-center text-center">
-                        <div class="text-6xl mb-4">${data.flag}</div>
-                        <h3 class="text-2xl font-bold text-stone-800">${country}</h3>
-                        <span class="inline-block mt-2 px-3 py-1 bg-stone-200 text-stone-700 rounded-full text-xs font-bold uppercase">${data.focus}</span>
-                    </div>
-                    <div class="p-6 md:w-2/3">
-                        <div class="grid grid-cols-2 gap-4 mb-6">
-                            <div class="p-3 bg-white border border-stone-100 rounded shadow-sm">
-                                <p class="text-xs text-stone-500 uppercase">Current Price Ref</p>
-                                <p class="text-xl font-bold text-amber-600">${data.price}</p>
-                            </div>
-                            <div class="p-3 bg-white border border-stone-100 rounded shadow-sm">
-                                <p class="text-xs text-stone-500 uppercase">Weekly Trend</p>
-                                <p class="text-xl font-bold ${data.trend === 'Rising' ? 'text-emerald-600' : (data.trend === 'Falling' ? 'text-rose-600' : 'text-stone-600')}">
-                                    ${data.trend === 'Rising' ? '<i class="fa-solid fa-arrow-trend-up"></i>' : (data.trend === 'Falling' ? '<i class="fa-solid fa-arrow-trend-down"></i>' : '<i class="fa-solid fa-minus"></i>')} ${data.trend}
-                                </p>
-                            </div>
-                        </div>
-                        <h4 class="font-bold text-stone-800 mb-2">Market Analyst Notes</h4>
-                        <p class="text-stone-600 leading-relaxed text-sm bg-stone-50 p-4 rounded border-l-4 border-amber-400">
-                            ${data.notes}
-                        </p>
-                    </div>
-                </div>
-            `;
-            
-            document.getElementById('countryCard').innerHTML = html;
-        }
-
-    </script>
 </body>
 </html>
