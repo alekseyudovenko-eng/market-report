@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Аналитика рынка масел 2026</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 pb-12">
+
+    <!-- Header -->
+    <header class="bg-[#0f172a] text-white shadow-2xl relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-64 h-64 bg-blue-600/10 rounded-full -mr-32 -mt-32 blur-3xl"></div>
+        <div class="max-w-7xl mx-auto px-6 py-10 relative z-10">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+                <div>
+                    <div class="flex items-center gap-2 text-blue-400 mb-2 font-bold uppercase tracking-widest text-xs">
+                        <span>● Global Market Intelligence</span>
+                    </div>
+                    <h1 class="text-4xl font-black tracking-tight uppercase">Рынок растительных масел</h1>
+                    <p class="text-slate-400 mt-2 text-sm italic">Аналитический период: 26 января – 2 февраля 2026</p>
+                </div>
+                <div class="bg-blue-600/20 border border-blue-500/30 p-4 rounded-2xl backdrop-blur-md">
+                    <p class="text-[10px] uppercase text-blue-300 font-bold tracking-widest">Статус рынка</p>
+                    <p class="text-xl font-black text-orange-400 italic">ВЫСОКАЯ ТУРБУЛЕНТНОСТЬ</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="bg-white border-b sticky top-0 z-50 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 flex space-x-2 py-3 overflow-x-auto no-scrollbar">
+            <button onclick="openTab(event, 'summary')" class="tab-btn active bg-blue-600 text-white px-6 py-3 text-sm font-bold rounded-xl transition-all">ОБЗОР</button>
+            <button onclick="openTab(event, 'prices')" class="tab-btn px-6 py-3 text-sm font-bold rounded-xl text-slate-500 hover:bg-slate-100 transition-all">ЦЕНЫ</button>
+            <button onclick="openTab(event, 'logistics')" class="tab-btn px-6 py-3 text-sm font-bold rounded-xl text-slate-500 hover:bg-slate-100 transition-all">ЛОГИСТИКА</button>
+            <button onclick="openTab(event, 'policy')" class="tab-btn px-6 py-3 text-sm font-bold rounded-xl text-slate-500 hover:bg-slate-100 transition-all">РЕГУЛИРОВАНИЕ</button>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-6 py-8">
+        
+        <!-- Tab: Summary -->
+        <div id="summary" class="tab-content active space-y-8 animate-in fade-in">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white p-8 rounded-[2rem] shadow-sm border border-slate-200">
+                    <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Объем рынка (2026)</p>
+                    <p class="text-4xl font-black text-slate-900">$341.99 <span class="text-xl text-slate-400 font-normal">млрд</span></p>
+                    <p class="text-green-600 font-bold text-xs mt-4">↑ CAGR 6.22%+</p>
+                </div>
+                <div class="bg-white p-8 rounded-[2rem] shadow-sm border border-slate-200">
+                    <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Мировые запасы</p>
+                    <p class="text-4xl font-black text-slate-900">33.8 <span class="text-xl text-slate-400 font-normal">млн т</span></p>
+                    <p class="text-red-600 font-bold text-xs mt-4">⚠ Минимум за 4 года</p>
+                </div>
+                <div class="bg-slate-900 p-8 rounded-[2rem] shadow-xl text-white">
+                    <p class="text-xs font-bold text-blue-400 uppercase tracking-widest mb-2">Нефть Brent</p>
+                    <p class="text-4xl font-black">$72.00</p>
+                    <p class="text-blue-300 font-bold text-xs mt-4">↑ Пик с августа 2025</p>
+                </div>
+            </div>
+
+            <div class="bg-white p-10 rounded-[2rem] border-l-[12px] border-blue-600 shadow-sm">
+                <h2 class="text-2xl font-black mb-4 uppercase italic">Ключевой инсайт недели</h2>
+                <p class="text-slate-600 leading-relaxed text-xl italic">
+                    "Растительные жиры трансформировались из пищевого продукта в критическое сырье для биоэнергетики (HVO/SAF). Это создает фундаментальный дефицит предложения на фоне геополитических рисков в Черном море."
+                </p>
+            </div>
+        </div>
+
+        <!-- Tab: Prices -->
+        <div id="prices" class="tab-content space-y-6">
+            <div class="bg-white rounded-[2rem] shadow-xl overflow-hidden border border-slate-200">
+                <div class="bg-slate-900 px-8 py-6 flex justify-between items-center">
+                    <h2 class="text-white font-black uppercase tracking-widest text-sm">Таблица ценовых индикаторов</h2>
+                    <span class="text-blue-400 text-xs font-bold underline">Обновлено: 02.02.2026</span>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left">
+                        <thead>
+                            <tr class="bg-slate-50 text-slate-500 text-[10px] uppercase font-black tracking-widest border-b">
+                                <th class="px-8 py-5">Продукт</th>
+                                <th class="px-8 py-5">Базис</th>
+                                <th class="px-8 py-5 text-right">Цена</th>
+                                <th class="px-8 py-5 text-center">Изм.</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100 text-sm">
+                            <tr class="hover:bg-blue-50 transition-colors">
+                                <td class="px-8 py-5 font-bold">Sunflower Oil</td>
+                                <td class="px-8 py-5 text-slate-500">FOB Six Ports (EU)</td>
+                                <td class="px-8 py-5 text-right font-black">$1,409.00</td>
+                                <td class="px-8 py-5 text-center text-green-600 font-bold">+$80.00</td>
+                            </tr>
+                            <tr class="hover:bg-blue-50 transition-colors">
+                                <td class="px-8 py-5 font-bold">Sunflower Oil</td>
+                                <td class="px-8 py-5 text-slate-500">FOB Russia</td>
+                                <td class="px-8 py-5 text-right font-black">$1,285.00</td>
+                                <td class="px-8 py-5 text-center text-green-600 font-bold">+$45.00</td>
+                            </tr>
+                            <tr class="hover:bg-blue-50 transition-colors">
+                                <td class="px-8 py-5 font-bold">Palm Oil</td>
+                                <td class="px-8 py-5 text-slate-500">BMD Futures</td>
+                                <td class="px-8 py-5 text-right font-black">4,198 MYR</td>
+                                <td class="px-8 py-5 text-center text-green-600 font-bold">+16 MYR</td>
+                            </tr>
+                            <tr class="hover:bg-blue-50 transition-colors">
+                                <td class="px-8 py-5 font-bold">Olive Oil (EVOO)</td>
+                                <td class="px-8 py-5 text-slate-500">Italy</td>
+                                <td class="px-8 py-5 text-right font-black">€6.90</td>
+                                <td class="px-8 py-5 text-center text-red-600 font-bold">Decrease</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab: Logistics -->
+        <div id="logistics" class="tab-content space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white p-8 rounded-[2rem] border border-slate-200">
+                    <h3 class="text-xl font-black mb-6 uppercase text-blue-600">Украина: Состояние активов</h3>
+                    <div class="space-y-4">
+                        <div class="p-5 bg-red-50 rounded-2xl border border-red-100 text-sm">
+                            <p class="font-bold text-red-800 mb-2 uppercase tracking-tighter">Критические повреждения:</p>
+                            <ul class="space-y-2 text-red-700 font-medium">
+                                <li>• Терминал Allseeds (Южный) — работа приостановлена.</li>
+                                <li>• Завод "Олейна" (Bunge) — перебои в энергоснабжении.</li>
+                            </ul>
+                        </div>
+                        <p class="text-slate-500 text-sm leading-relaxed">
+                            Доля в импорте подсолнечного масла ЕС остается критической — 92.3%. Сбои ведут к дефициту в Центральной Европе.
+                        </p>
+                    </div>
+                </div>
+                <div class="bg-slate-900 text-white p-8 rounded-[2rem]">
+                    <h3 class="text-xl font-black mb-6 uppercase">Россия: Экспортные потоки</h3>
+                    <div class="space-y-6">
+                        <div class="flex justify-between items-end border-b border-white/10 pb-4">
+                            <span class="text-slate-400 text-xs font-bold uppercase tracking-widest">Доля на мировом рынке</span>
+                            <span class="text-3xl font-black text-blue-400">40%+</span>
+                        </div>
+                        <p class="text-sm text-slate-300 leading-relaxed italic">
+                            Китай и Индия остаются основными направлениями. Пошлина на экспорт в феврале установлена на уровне 9,298.6 руб/т, что оказывает давление на маржинальность переработчиков.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab: Policy -->
+        <div id="policy" class="tab-content space-y-6">
+            <div class="bg-white p-8 rounded-[2rem] border border-slate-200 overflow-hidden relative">
+                <h3 class="text-2xl font-black mb-8 uppercase italic">Регуляторные изменения (Январь 2026)</h3>
+                <div class="grid grid-cols-1 gap-4">
+                    <div class="flex items-center justify-between p-6 bg-slate-50 rounded-2xl border border-slate-100 hover:bg-blue-50 transition-all">
+                        <div>
+                            <span class="text-[10px] font-black bg-blue-600 text-white px-2 py-1 rounded">ТУРЦИЯ</span>
+                            <p class="font-bold mt-2">Квота 1 млн т на семена (0% пошлина)</p>
+                        </div>
+                        <span class="text-xs font-bold text-blue-600">↑ Спрос на сырье</span>
+                    </div>
+                    <div class="flex items-center justify-between p-6 bg-slate-50 rounded-2xl border border-slate-100 hover:bg-blue-50 transition-all">
+                        <div>
+                            <span class="text-[10px] font-black bg-emerald-600 text-white px-2 py-1 rounded">ЕВРОСОЮЗ</span>
+                            <p class="font-bold mt-2">Отмена двойного учета UCOME</p>
+                        </div>
+                        <span class="text-xs font-bold text-emerald-600">↑ Рост цен на рапс</span>
+                    </div>
+                    <div class="flex items-center justify-between p-6 bg-slate-50 rounded-2xl border border-slate-100 hover:bg-blue-50 transition-all">
+                        <div>
+                            <span class="text-[10px] font-black bg-orange-600 text-white px-2 py-1 rounded">УЗБЕКИСТАН</span>
+                            <p class="font-bold mt-2">0% пошлина на пальмовое масло</p>
+                        </div>
+                        <span class="text-xs font-bold text-orange-600">Поддержка кондитеров</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function openTab(evt, tabName) {
+            var i, tabContent, tabBtn;
+            tabContent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabContent.length; i++) {
+                tabContent[i].classList.remove("active");
+            }
+            tabBtn = document.getElementsByClassName("tab-btn");
+            for (i = 0; i < tabBtn.length; i++) {
+                tabBtn[i].classList.remove("active", "bg-blue-600", "text-white");
+                tabBtn[i].classList.add("text-slate-500");
+            }
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active", "bg-blue-600", "text-white");
+            evt.currentTarget.classList.remove("text-slate-500");
+        }
+    </script>
+</body>
+</html>
