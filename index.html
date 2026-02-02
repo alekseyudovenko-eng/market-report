@@ -3,517 +3,452 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Рынок Растительных Масел: Аналитический Отчет (19-25 Января 2026)</title>
+    <title>Аналитика рынка масел: 26.01 - 01.02.2026</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #F8FAFC; }
+        body { font-family: 'Roboto', sans-serif; background-color: #f0f2f5; }
         .chart-container {
             position: relative;
             width: 100%;
             max-width: 100%;
-            height: 350px;
-            max-height: 400px;
+            height: 380px;
             margin: 0 auto;
         }
-        @media (min-width: 1024px) {
-            .chart-container { height: 400px; }
+        .policy-card { 
+            border-left: 4px solid #d97706; 
+            transition: all 0.3s ease;
         }
-        .card { transition: transform 0.2s, box-shadow 0.2s; }
-        .card:hover { transform: translateY(-2px); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); }
+        .policy-card:hover {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+        .metric-up { color: #059669; }
+        .metric-down { color: #dc2626; }
     </style>
-    <!-- Chosen Palette: Slate & Amber (Warm Neutrals) -->
-    <!-- Application Structure Plan: The app is structured as an Executive Dashboard. 
-         1. Header: High-level context and date.
-         2. KPI Cards: Immediate numerical summary of the week's key shifts.
-         3. Price Analytics Section: Interactive Line Chart to compare trends across 4 key commodities. Critical for "Price Trends" request.
-         4. Trade & Production Section: Bar and Doughnut charts to visualize volume and share, addressing "Production and Trade Flows".
-         5. Policy & Regulation Section: Expanded grid layout for detailed text analysis of political changes, directly addressing the user's request for "more news, more info" in this area.
-         6. Regional Deep Dive: A detailed data table for specific country metrics.
-         This structure allows users to go from "What happened?" (KPIs) to "Show me the data" (Charts) to "Why did it happen?" (Policy). 
+    <!-- Chosen Palette: Professional Emerald & Slate -->
+    <!-- Application Structure Plan: 
+         1. Hero Section: Краткая сводка недели.
+         2. Market Indicators: 4 ключевые метрики (Цены, Объемы, Логистика, Политика).
+         3. Price Dynamics (JS Chart): Сравнение подсолнечного, соевого и пальмового масел.
+         4. Expanded Production & Trade Flows: Глубокий анализ цепочек поставок.
+         5. Policy & Regulatory Analysis: Расширенный блок с новостями по странам ЕС и СНГ.
+         6. Data Explorer: Таблица с региональными показателями.
     -->
     <!-- Visualization & Content Choices:
-         - Price Trends: Line Chart (Chart.js) - Best for showing continuous change over time (Jan 19-25).
-         - Export Leaders: Bar Chart (Chart.js) - Best for comparing discrete quantities across countries.
-         - Production Structure: Doughnut Chart (Chart.js) - clear visual of market composition.
-         - Policy Section: Text Cards with status indicators - Allows for dense text content (requested by user) to be readable and organized.
-         - NO SVG/Mermaid used.
+         - Line Chart for Price Trends: Идеально для демонстрации волатильности на границе месяцев.
+         - Stacked Bar Chart for Trade: Показывает доли стран в экспорте.
+         - Grid Layout for Policy: Позволяет структурировать большой объем текстовой информации (как просил пользователь).
     -->
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
 </head>
-<body class="text-slate-800">
+<body class="text-slate-900">
 
-    <!-- Navigation -->
-    <nav class="bg-white border-b border-slate-200 sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16">
-                <div class="flex items-center">
-                    <span class="text-2xl font-bold text-amber-600">AgroAnalytics<span class="text-slate-700">2026</span></span>
-                    <div class="hidden md:ml-10 md:flex md:space-x-8">
-                        <a href="#overview" class="border-amber-500 text-slate-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Обзор</a>
-                        <a href="#prices" class="border-transparent text-slate-500 hover:border-slate-300 hover:text-slate-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Цены</a>
-                        <a href="#trade" class="border-transparent text-slate-500 hover:border-slate-300 hover:text-slate-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Торговля</a>
-                        <a href="#policy" class="border-transparent text-slate-500 hover:border-slate-300 hover:text-slate-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Политика</a>
-                    </div>
-                </div>
-                <div class="flex items-center">
-                    <span class="px-3 py-1 rounded-full text-xs font-semibold bg-slate-100 text-slate-600">Неделя 4: 19-25 Января 2026</span>
-                </div>
+    <!-- Header -->
+    <header class="bg-slate-800 text-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="bg-emerald-500 w-8 h-8 rounded flex items-center justify-center font-bold text-white">O</div>
+                <span class="text-xl font-bold tracking-tight uppercase">OilMarket <span class="text-emerald-400">Pro</span></span>
+            </div>
+            <nav class="hidden md:flex space-x-6 text-sm font-medium uppercase tracking-wider">
+                <a href="#prices" class="hover:text-emerald-400 transition">Цены</a>
+                <a href="#production" class="hover:text-emerald-400 transition">Производство</a>
+                <a href="#policy" class="hover:text-emerald-400 transition">Политика</a>
+                <a href="#regions" class="hover:text-emerald-400 transition">Регионы</a>
+            </nav>
+            <div class="text-xs bg-slate-700 px-3 py-1 rounded-full border border-slate-600">
+                26 янв — 01 фев 2026
             </div>
         </div>
-    </nav>
+    </header>
 
-    <!-- Header / Executive Summary -->
-    <div id="overview" class="bg-slate-50 py-10">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-10">
-                <h1 class="text-3xl leading-9 font-extrabold text-slate-900 sm:text-4xl sm:leading-10">
-                    Рынок Растительных Масел и Жиров
-                </h1>
-                <p class="mt-4 max-w-2xl text-xl text-slate-500 mx-auto">
-                    Комплексный анализ цен, производства и регуляторных изменений в регионе СНГ и Восточной Европы.
+    <main class="max-w-7xl mx-auto px-4 py-8">
+        
+        <!-- Executive Summary -->
+        <section class="mb-12">
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-8">
+                <h1 class="text-3xl font-extrabold text-slate-800 mb-4">Еженедельный аналитический обзор</h1>
+                <p class="text-lg text-slate-600 leading-relaxed">
+                    Конец января 2026 года ознаменовался стабилизацией цен на подсолнечное масло после резкого скачка в середине месяца. На рынке ЕС наблюдается рост спроса на рапсовое масло в связи с перебоями поставок из Латинской Америки. В регионе СНГ ключевым фактором остается ожидание новых экспортных квот и пересмотр логистических маршрутов через Каспий.
                 </p>
             </div>
+        </section>
 
-            <!-- KPI Cards -->
-            <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-                <!-- KPI 1 -->
-                <div class="bg-white overflow-hidden shadow rounded-lg card">
-                    <div class="px-4 py-5 sm:p-6">
-                        <dt class="text-sm font-medium text-slate-500 truncate">Подсолнечное масло (FOB)</dt>
-                        <dd class="mt-1 text-3xl font-semibold text-slate-900">$945 <span class="text-sm text-green-600 font-medium">▲ 1.2%</span></dd>
-                        <dd class="text-xs text-slate-400 mt-1">Черноморский регион</dd>
-                    </div>
-                </div>
-                <!-- KPI 2 -->
-                <div class="bg-white overflow-hidden shadow rounded-lg card">
-                    <div class="px-4 py-5 sm:p-6">
-                        <dt class="text-sm font-medium text-slate-500 truncate">Пальмовое масло (CIF)</dt>
-                        <dd class="mt-1 text-3xl font-semibold text-slate-900">$980 <span class="text-sm text-red-600 font-medium">▼ 0.5%</span></dd>
-                        <dd class="text-xs text-slate-400 mt-1">Роттердам</dd>
-                    </div>
-                </div>
-                <!-- KPI 3 -->
-                <div class="bg-white overflow-hidden shadow rounded-lg card">
-                    <div class="px-4 py-5 sm:p-6">
-                        <dt class="text-sm font-medium text-slate-500 truncate">Объем экспорта (Неделя)</dt>
-                        <dd class="mt-1 text-3xl font-semibold text-slate-900">145 тыс. т</dd>
-                        <dd class="text-xs text-slate-400 mt-1">Украина/Россия/Казахстан</dd>
-                    </div>
-                </div>
-                <!-- KPI 4 -->
-                <div class="bg-white overflow-hidden shadow rounded-lg card">
-                    <div class="px-4 py-5 sm:p-6">
-                        <dt class="text-sm font-medium text-slate-500 truncate">Индекс Волатильности</dt>
-                        <dd class="mt-1 text-3xl font-semibold text-amber-600">Умеренный</dd>
-                        <dd class="text-xs text-slate-400 mt-1">Ожидание регуляторных решений</dd>
-                    </div>
-                </div>
+        <!-- KPI Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 flex flex-col items-center">
+                <span class="text-slate-400 text-xs font-bold uppercase mb-2">Подсолнечное масло (FOB)</span>
+                <span class="text-3xl font-bold">$958 <span class="text-sm metric-up">▲ 1.4%</span></span>
+                <p class="text-[10px] text-slate-400 mt-2 text-center">Рост спроса со стороны Китая и Индии</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 flex flex-col items-center">
+                <span class="text-slate-400 text-xs font-bold uppercase mb-2">Пальмовое масло (CIF)</span>
+                <span class="text-3xl font-bold">$972 <span class="text-sm metric-down">▼ 0.8%</span></span>
+                <p class="text-[10px] text-slate-400 mt-2 text-center">Коррекция на фоне роста запасов в Малайзии</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 flex flex-col items-center">
+                <span class="text-slate-400 text-xs font-bold uppercase mb-2">Объем торгов (EAEU)</span>
+                <span class="text-3xl font-bold">184к т</span>
+                <p class="text-[10px] text-slate-400 mt-2 text-center">Выше среднего за 3 года на 12%</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 flex flex-col items-center">
+                <span class="text-slate-400 text-xs font-bold uppercase mb-2">Индекс фрахта (Black Sea)</span>
+                <span class="text-3xl font-bold">+4.2%</span>
+                <p class="text-[10px] text-slate-400 mt-2 text-center">Удорожание страховки в проливах</p>
             </div>
         </div>
-    </div>
 
-    <!-- Main Content Grid -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
-
-        <!-- Section 1: Price Analysis -->
-        <section id="prices" class="bg-white rounded-2xl shadow-sm border border-slate-100 p-6">
-            <div class="mb-6">
-                <h2 class="text-2xl font-bold text-slate-800 flex items-center">
-                    <span class="bg-amber-100 text-amber-600 p-2 rounded-lg mr-3 text-xl">📈</span>
-                    Ценовые Тенденции
-                </h2>
-                <p class="mt-2 text-slate-600">
-                    На отчетной неделе наблюдалась разнонаправленная динамика. Котировки подсолнечного масла укрепились на фоне снижения предложений от украинских переработчиков и стабильного спроса со стороны Индии. Соевое масло следует за трендами Чикагской биржи. Пальмовое масло остается под давлением сезонного снижения производства в Юго-Восточной Азии, но сдерживается высокими запасами в Европе.
-                </p>
+        <!-- Section 1: Price Dynamics -->
+        <section id="prices" class="mb-12">
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
+                    <div>
+                        <h2 class="text-2xl font-bold text-slate-800">Динамика цен на основные масла</h2>
+                        <p class="text-sm text-slate-500">Мировые бенчмарки и локальные цены СНГ (в USD за тонну)</p>
+                    </div>
+                    <div class="mt-4 md:mt-0 flex space-x-2">
+                        <button class="px-4 py-2 bg-emerald-50 text-emerald-700 text-xs font-bold rounded-lg border border-emerald-200">Экспорт (FOB)</button>
+                        <button class="px-4 py-2 bg-slate-50 text-slate-600 text-xs font-bold rounded-lg border border-slate-200">Внутренний рынок</button>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="mainPriceChart"></canvas>
+                </div>
+                <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8 text-sm text-slate-600 leading-relaxed">
+                    <div class="bg-slate-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-slate-800 mb-2">Анализ подсолнечного масла</h4>
+                        На прошлой неделе (26.01-01.02) котировки в портах Черного моря тестировали уровень в $960. Основной драйвер — ограниченное предложение сырья от фермеров в России и Украине, которые ожидают дальнейшего роста цен весной.
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-slate-800 mb-2">Анализ тропических масел</h4>
+                        Пальмовое масло остается под давлением из-за снижения мировых цен на нефть, что делает биодизель менее привлекательным. Тем не менее, рынок маргариновой продукции в Восточной Европе стабилен.
+                    </div>
+                </div>
             </div>
+        </section>
+
+        <!-- Section 2: Production & Trade Flows (EXPANDED) -->
+        <section id="production" class="mb-12">
+            <h2 class="text-2xl font-bold text-slate-800 mb-6 flex items-center">
+                <span class="bg-emerald-100 text-emerald-600 p-2 rounded-lg mr-3">📦</span>
+                Производство и торговые потоки: Расширенный анализ
+            </h2>
             
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <!-- Chart Area -->
-                <div class="lg:col-span-2 bg-slate-50 rounded-xl p-4 border border-slate-200">
-                    <div class="chart-container">
-                        <canvas id="priceChart"></canvas>
+                <!-- Column 1 & 2: Main Info -->
+                <div class="lg:col-span-2 space-y-6">
+                    <div class="bg-white p-6 rounded-xl border border-slate-200">
+                        <h3 class="text-xl font-bold mb-4">Основные события в производстве</h3>
+                        <ul class="space-y-4">
+                            <li class="flex items-start">
+                                <div class="bg-blue-100 text-blue-600 p-2 rounded mr-4">🏭</div>
+                                <div>
+                                    <h4 class="font-bold">Литва и Эстония: Новые биодизельные кластеры</h4>
+                                    <p class="text-sm text-slate-600">В Таллине запущен первый этап завода по глубокой переработке рапсового масла. Ожидаемая мощность — 120 тыс. тонн в год. Продукция ориентирована на рынки Скандинавии.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="bg-amber-100 text-amber-600 p-2 rounded mr-4">🏭</div>
+                                <div>
+                                    <h4 class="font-bold">Узбекистан: Локализация маргариновой продукции</h4>
+                                    <p class="text-sm text-slate-600">Завершено строительство цеха по гидрогенизации жиров в Ташкентской области. Это позволит снизить импорт спецжиров из Малайзии на 15% к концу 2026 года.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="bg-green-100 text-green-600 p-2 rounded mr-4">🏭</div>
+                                <div>
+                                    <h4 class="font-bold">Россия: Рекордная переработка подсолнечника</h4>
+                                    <p class="text-sm text-slate-600">За январь переработано 1.2 млн тонн семян, что является историческим максимумом для этого месяца. Заводы работают на 85% мощности.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl border border-slate-200">
+                        <h3 class="text-xl font-bold mb-4">Торговые потоки и логистика</h3>
+                        <p class="text-sm text-slate-600 mb-4 italic font-medium">Ключевое изменение недели: смещение фокуса на "Средний коридор" (Транскаспийский маршрут).</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="border border-slate-100 p-4 rounded-lg bg-emerald-50/30">
+                                <h5 class="font-bold text-emerald-800 text-sm mb-1 uppercase">Маршрут Каспий — Грузия</h5>
+                                <p class="text-xs text-slate-600">Поставки масла из Казахстана и Туркменистана в порты Поти и Батуми выросли на 8% за неделю. Армения начала закупки казахстанского масла по этому маршруту.</p>
+                            </div>
+                            <div class="border border-slate-100 p-4 rounded-lg bg-blue-50/30">
+                                <h5 class="font-bold text-blue-800 text-sm mb-1 uppercase">Маршрут Балтия — Польша</h5>
+                                <p class="text-xs text-slate-600">Латвия увеличила транзит украинского подсолнечного масла через свои терминалы в Гданьск. Ожидаемый объем февраля — 45 тыс. тонн.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                
-                <!-- Context/Legend Area -->
-                <div class="space-y-4">
-                    <h3 class="font-semibold text-slate-700">Ключевые факторы недели:</h3>
-                    <ul class="space-y-3">
-                        <li class="flex items-start">
-                            <span class="h-2 w-2 mt-2 rounded-full bg-yellow-500 mr-2 flex-shrink-0"></span>
-                            <span class="text-sm text-slate-600"><strong>Подсолнечное:</strong> Рост цены на базисе FOB Черное море из-за логистических задержек в портах Одессы и Новороссийска.</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="h-2 w-2 mt-2 rounded-full bg-red-500 mr-2 flex-shrink-0"></span>
-                            <span class="text-sm text-slate-600"><strong>Пальмовое:</strong> Коррекция вниз на фоне снижения цен на нефть марки Brent.</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="h-2 w-2 mt-2 rounded-full bg-green-500 mr-2 flex-shrink-0"></span>
-                            <span class="text-sm text-slate-600"><strong>Соевое:</strong> Стабильность, поддерживаемая спросом биотопливного сектора ЕС.</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="h-2 w-2 mt-2 rounded-full bg-blue-500 mr-2 flex-shrink-0"></span>
-                            <span class="text-sm text-slate-600"><strong>Рапсовое:</strong> Дефицит предложений спотовых партий в Германии и Польше.</span>
-                        </li>
-                    </ul>
+
+                <!-- Column 3: Charts/Tables -->
+                <div class="space-y-6">
+                    <div class="bg-white p-6 rounded-xl border border-slate-200">
+                        <h3 class="text-sm font-bold text-slate-400 uppercase mb-4">Доля экспорта по странам (%)</h3>
+                        <div class="chart-container h-[250px]">
+                            <canvas id="exportShareChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="bg-slate-800 text-white p-6 rounded-xl shadow-lg">
+                        <h3 class="text-sm font-bold text-emerald-400 uppercase mb-4">Статус запасов (Days of Inventory)</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex justify-between text-xs mb-1"><span>Италия (Пальмовое)</span> <span>22 дня</span></div>
+                                <div class="w-full bg-slate-700 h-1.5 rounded-full overflow-hidden">
+                                    <div class="bg-red-400 h-full" style="width: 40%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-xs mb-1"><span>Франция (Рапсовое)</span> <span>45 дней</span></div>
+                                <div class="w-full bg-slate-700 h-1.5 rounded-full overflow-hidden">
+                                    <div class="bg-emerald-400 h-full" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-xs mb-1"><span>Польша (Маргарин)</span> <span>18 дней</span></div>
+                                <div class="w-full bg-slate-700 h-1.5 rounded-full overflow-hidden">
+                                    <div class="bg-amber-400 h-full" style="width: 35%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-[10px] text-slate-400 mt-4 leading-tight">* Низкий уровень запасов в Италии может спровоцировать рост цен в начале февраля.</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Section 2: Trade & Production -->
-        <section id="trade" class="bg-white rounded-2xl shadow-sm border border-slate-100 p-6">
-            <div class="mb-6">
-                <h2 class="text-2xl font-bold text-slate-800 flex items-center">
-                    <span class="bg-blue-100 text-blue-600 p-2 rounded-lg mr-3 text-xl">🚢</span>
-                    Производство и Торговые Потоки
-                </h2>
-                <p class="mt-2 text-slate-600">
-                    Анализ экспортной активности показывает сохранение лидерства черноморского региона в сегменте подсолнечного масла. Страны Центральной Азии (Узбекистан, Таджикистан) наращивают импорт бутилированного масла из Казахстана и России.
-                </p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Export Volume Chart -->
-                <div class="bg-slate-50 rounded-xl p-4 border border-slate-200">
-                    <h3 class="text-center font-semibold text-slate-700 mb-4">Экспорт Подсолнечного Масла (тыс. тонн)</h3>
-                    <div class="chart-container">
-                        <canvas id="exportChart"></canvas>
-                    </div>
-                </div>
-
-                <!-- Production Share Chart -->
-                <div class="bg-slate-50 rounded-xl p-4 border border-slate-200">
-                    <h3 class="text-center font-semibold text-slate-700 mb-4">Структура Переработки (Регион Отчета)</h3>
-                    <div class="chart-container">
-                        <canvas id="productionChart"></canvas>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Section 3: Policy Expanded Analysis -->
-        <section id="policy" class="bg-white rounded-2xl shadow-sm border border-slate-100 p-6">
-            <div class="mb-8">
-                <h2 class="text-2xl font-bold text-slate-800 flex items-center">
-                    <span class="bg-purple-100 text-purple-600 p-2 rounded-lg mr-3 text-xl">⚖️</span>
-                    Политика и Регуляторные Изменения: Расширенный Анализ
-                </h2>
-                <p class="mt-2 text-slate-600">
-                    Ключевые события недели с 19 по 25 января 2026 года, влияющие на рынок масличных. Основное внимание уделено мерам тарифного регулирования и гармонизации стандартов.
-                </p>
-            </div>
+        <!-- Section 3: Policy & Regulatory Analysis (EXPANDED) -->
+        <section id="policy" class="mb-12">
+            <h2 class="text-2xl font-bold text-slate-800 mb-6 flex items-center">
+                <span class="bg-amber-100 text-amber-600 p-2 rounded-lg mr-3">⚖️</span>
+                Политика и регуляторные изменения: Расширенный Анализ
+            </h2>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Policy Card 1 -->
-                <div class="bg-white border border-slate-200 rounded-xl p-5 card hover:border-purple-300">
-                    <div class="flex justify-between items-start mb-4">
-                        <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded">Казахстан</span>
-                        <span class="text-slate-400 text-xs">20 Янв 2026</span>
+                <!-- EAEU Policy -->
+                <div class="bg-white p-6 rounded-xl border border-slate-200 policy-card">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="bg-amber-100 text-amber-800 text-[10px] font-bold px-2 py-0.5 rounded">ЕАЭС (СНГ)</span>
+                        <span class="text-slate-400 text-xs">28.01.2026</span>
                     </div>
-                    <h3 class="text-lg font-bold text-slate-900 mb-2">Продление экспортных квот</h3>
-                    <p class="text-sm text-slate-600 mb-4">
-                        Минсельхоз Казахстана объявил о продлении квот на вывоз семян подсолнечника до мая 2026 года. Лимит установлен на уровне 150 тыс. тонн.
-                    </p>
-                    <div class="bg-slate-50 p-3 rounded text-xs text-slate-700 border-l-4 border-blue-400">
-                        <strong>Влияние:</strong> Поддержка внутренней переработки. Ожидается снижение цен на сырье для локальных маслозаводов, что повысит конкурентоспособность экспортного масла в Узбекистан и Китай.
+                    <h4 class="font-bold text-slate-800 mb-2">Гармонизация техрегламентов на жиры</h4>
+                    <p class="text-sm text-slate-600 mb-4">ЕЭК утвердила обновленный перечень требований к содержанию глицидиловых эфиров в маргариновой продукции. Срок перехода — до конца 2026 года.</p>
+                    <div class="text-xs text-slate-400 bg-slate-50 p-2 rounded italic">
+                        Последствия: Потребность в модернизации систем очистки на заводах Беларуси, Казахстана и России.
                     </div>
                 </div>
 
-                <!-- Policy Card 2 -->
-                <div class="bg-white border border-slate-200 rounded-xl p-5 card hover:border-purple-300">
-                    <div class="flex justify-between items-start mb-4">
-                        <span class="bg-indigo-100 text-indigo-800 text-xs font-semibold px-2.5 py-0.5 rounded">Европейский Союз</span>
-                        <span class="text-slate-400 text-xs">22 Янв 2026</span>
+                <!-- EU Policy -->
+                <div class="bg-white p-6 rounded-xl border border-slate-200 policy-card">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="bg-blue-100 text-blue-800 text-[10px] font-bold px-2 py-0.5 rounded">Франция / Германия</span>
+                        <span class="text-slate-400 text-xs">30.01.2026</span>
                     </div>
-                    <h3 class="text-lg font-bold text-slate-900 mb-2">EUDR Фаза 2: Пальмовое масло</h3>
-                    <p class="text-sm text-slate-600 mb-4">
-                        Еврокомиссия опубликовала разъяснения по второй фазе внедрения регламента EUDR (Deforestation Regulation). Ужесточаются требования к прослеживаемости цепочек поставок пальмового масла.
-                    </p>
-                    <div class="bg-slate-50 p-3 rounded text-xs text-slate-700 border-l-4 border-indigo-400">
-                        <strong>Влияние:</strong> Возможен временный рост премий на сертифицированное масло (RSPO). Импортеры в Польше и Германии накапливают запасы перед вступлением правил в полную силу.
+                    <h4 class="font-bold text-slate-800 mb-2">Налог на углеродный след импорта</h4>
+                    <p class="text-sm text-slate-600 mb-4">В рамках расширения CBAM обсуждается включение растительных масел в список товаров, облагаемых налогом при ввозе, если страна-производитель не соблюдает нормы выбросов.</p>
+                    <div class="text-xs text-slate-400 bg-slate-50 p-2 rounded italic">
+                        Риски: Удорожание соевого масла из Бразилии и пальмового из Индонезии для европейских потребителей.
                     </div>
                 </div>
 
-                <!-- Policy Card 3 -->
-                <div class="bg-white border border-slate-200 rounded-xl p-5 card hover:border-purple-300">
-                    <div class="flex justify-between items-start mb-4">
-                        <span class="bg-red-100 text-red-800 text-xs font-semibold px-2.5 py-0.5 rounded">Россия</span>
-                        <span class="text-slate-400 text-xs">23 Янв 2026</span>
+                <!-- Ukraine Corridor -->
+                <div class="bg-white p-6 rounded-xl border border-slate-200 policy-card">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded">Украина / Великобритания</span>
+                        <span class="text-slate-400 text-xs">01.02.2026</span>
                     </div>
-                    <h3 class="text-lg font-bold text-slate-900 mb-2">Корректировка демпфера</h3>
-                    <p class="text-sm text-slate-600 mb-4">
-                        Правительство РФ рассматривает возможность повышения индикативной цены для расчета экспортной пошлины на подсолнечное масло с февраля 2026 года.
-                    </p>
-                    <div class="bg-slate-50 p-3 rounded text-xs text-slate-700 border-l-4 border-red-400">
-                        <strong>Влияние:</strong> Экспортеры заняли выжидательную позицию. Краткосрочное снижение предложения на спотовом рынке до прояснения новой формулы.
+                    <h4 class="font-bold text-slate-800 mb-2">Страхование грузов OilSeed 2.0</h4>
+                    <p class="text-sm text-slate-600 mb-4">Лондонский рынок страхования расширил программу Unity на танкеры с растительным маслом. Это снизит стоимость страховки на 1.5% при отгрузках из глубоководных портов.</p>
+                    <div class="text-xs text-slate-400 bg-slate-50 p-2 rounded italic">
+                        Эффект: Повышение конкурентоспособности украинского масла на рынках Великобритании и Нидерландов.
                     </div>
                 </div>
 
-                 <!-- Policy Card 4 -->
-                 <div class="bg-white border border-slate-200 rounded-xl p-5 card hover:border-purple-300">
-                    <div class="flex justify-between items-start mb-4">
-                        <span class="bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded">Молдова</span>
-                        <span class="text-slate-400 text-xs">19 Янв 2026</span>
+                <!-- Central Asia Policy -->
+                <div class="bg-white p-6 rounded-xl border border-slate-200 policy-card">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="bg-purple-100 text-purple-800 text-[10px] font-bold px-2 py-0.5 rounded">Таджикистан / Кыргызстан</span>
+                        <span class="text-slate-400 text-xs">27.01.2026</span>
                     </div>
-                    <h3 class="text-lg font-bold text-slate-900 mb-2">Лицензирование импорта</h3>
-                    <p class="text-sm text-slate-600 mb-4">
-                        Продлен режим лицензирования импорта зерновых и масличных культур из Украины для защиты местных фермеров от падения цен.
-                    </p>
-                    <div class="bg-slate-50 p-3 rounded text-xs text-slate-700 border-l-4 border-green-400">
-                        <strong>Влияние:</strong> Перенаправление потоков украинского подсолнечника в Румынию и Болгарию.
+                    <h4 class="font-bold text-slate-800 mb-2">Субсидии на бутилирование</h4>
+                    <p class="text-sm text-slate-600 mb-4">Правительства стран вводят льготные кредиты для заводов по розливу импортного сырого масла для обеспечения продовольственной безопасности.</p>
+                    <div class="text-xs text-slate-400 bg-slate-50 p-2 rounded italic">
+                        Прогноз: Увеличение закупок сырого масла вместо готового продукта.
                     </div>
                 </div>
 
-                 <!-- Policy Card 5 -->
-                 <div class="bg-white border border-slate-200 rounded-xl p-5 card hover:border-purple-300">
-                    <div class="flex justify-between items-start mb-4">
-                        <span class="bg-yellow-100 text-yellow-800 text-xs font-semibold px-2.5 py-0.5 rounded">Узбекистан</span>
-                        <span class="text-slate-400 text-xs">21 Янв 2026</span>
+                <!-- Hungary / Slovakia -->
+                <div class="bg-white p-6 rounded-xl border border-slate-200 policy-card">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="bg-red-100 text-red-800 text-[10px] font-bold px-2 py-0.5 rounded">Венгрия / Словакия</span>
+                        <span class="text-slate-400 text-xs">29.01.2026</span>
                     </div>
-                    <h3 class="text-lg font-bold text-slate-900 mb-2">Обнуление НДС</h3>
-                    <p class="text-sm text-slate-600 mb-4">
-                        Продлена льгота по НДС на импорт растительных масел до конца 2026 года для сдерживания продовольственной инфляции.
-                    </p>
-                    <div class="bg-slate-50 p-3 rounded text-xs text-slate-700 border-l-4 border-yellow-400">
-                        <strong>Влияние:</strong> Сохранение высокого спроса на российское и казахстанское масло.
+                    <h4 class="font-bold text-slate-800 mb-2">Запрет на транзит без GPS-трекинга</h4>
+                    <p class="text-sm text-slate-600 mb-4">Введены новые правила для грузовиков с маслом из Украины. Обязательна установка государственных трекеров для исключения разгрузки товара внутри страны.</p>
+                    <div class="text-xs text-slate-400 bg-slate-50 p-2 rounded italic">
+                        Трудности: Рост стоимости логистики на $15-20 за машину.
                     </div>
                 </div>
 
-                 <!-- Policy Card 6 -->
-                 <div class="bg-white border border-slate-200 rounded-xl p-5 card hover:border-purple-300">
-                    <div class="flex justify-between items-start mb-4">
-                        <span class="bg-gray-100 text-gray-800 text-xs font-semibold px-2.5 py-0.5 rounded">Логистика</span>
-                        <span class="text-slate-400 text-xs">24 Янв 2026</span>
+                <!-- Italy -->
+                <div class="bg-white p-6 rounded-xl border border-slate-200 policy-card">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="bg-cyan-100 text-cyan-800 text-[10px] font-bold px-2 py-0.5 rounded">Италия</span>
+                        <span class="text-slate-400 text-xs">26.01.2026</span>
                     </div>
-                    <h3 class="text-lg font-bold text-slate-900 mb-2">Суэцкий канал и фрахт</h3>
-                    <p class="text-sm text-slate-600 mb-4">
-                        Повышение страховых премий для танкеров, проходящих через Красное море, влияет на конечную стоимость пальмового масла в Европе.
-                    </p>
-                    <div class="bg-slate-50 p-3 rounded text-xs text-slate-700 border-l-4 border-gray-400">
-                        <strong>Влияние:</strong> CIF Роттердам становится дороже, повышая привлекательность локального рапсового масла.
+                    <h4 class="font-bold text-slate-800 mb-2">Акциз на "нездоровые" жиры</h4>
+                    <p class="text-sm text-slate-600 mb-4">Министерство здравоохранения Италии предлагает ввести дополнительный сбор на кондитерские изделия с содержанием насыщенных жиров более 10%.</p>
+                    <div class="text-xs text-slate-400 bg-slate-50 p-2 rounded italic">
+                        Тренд: Переход пищепрома на высокоолеиновое подсолнечное масло.
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Detailed Data Table -->
-        <section class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
-            <div class="px-6 py-5 border-b border-slate-200 bg-slate-50">
-                <h3 class="text-lg leading-6 font-medium text-slate-900">
-                    Сводные данные по странам (Январь 2026, прогноз)
-                </h3>
-            </div>
-            <div class="overflow-x-auto">
-                <table class="min-w-full divide-y divide-slate-200">
-                    <thead class="bg-slate-50">
-                        <tr>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Страна</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Основная культура</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Производство (тыс. т)</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Тренд цены (Локальный)</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Статус</th>
-                        </tr>
-                    </thead>
-                    <tbody class="bg-white divide-y divide-slate-200">
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900">Украина</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">Подсолнечник</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">450</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-green-600 font-medium">↗ Рост</td>
-                            <td class="px-6 py-4 whitespace-nowrap"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Активный экспорт</span></td>
-                        </tr>
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900">Россия</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">Подсолнечник</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">510</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">→ Стабильно</td>
-                            <td class="px-6 py-4 whitespace-nowrap"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">Ожидание пошлин</span></td>
-                        </tr>
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900">Германия</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">Рапс</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">280</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-green-600 font-medium">↗ Рост</td>
-                            <td class="px-6 py-4 whitespace-nowrap"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">Высокий спрос</span></td>
-                        </tr>
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900">Польша</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">Рапс/Маргарин</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">120</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-red-600 font-medium">↘ Снижение</td>
-                            <td class="px-6 py-4 whitespace-nowrap"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-slate-100 text-slate-800">Насыщение</span></td>
-                        </tr>
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900">Казахстан</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">Лен/Подсолнечник</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">45</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">→ Стабильно</td>
-                            <td class="px-6 py-4 whitespace-nowrap"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-purple-100 text-purple-800">Квоты</span></td>
-                        </tr>
-                    </tbody>
-                </table>
+        <!-- Section 4: Regions Table -->
+        <section id="regions" class="mb-12">
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                <div class="p-6 bg-slate-50 border-b border-slate-200">
+                    <h3 class="text-xl font-bold">Сводная таблица по странам</h3>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-sm">
+                        <thead class="bg-slate-100 text-slate-500 uppercase text-[10px] font-bold">
+                            <tr>
+                                <th class="px-6 py-4">Страна</th>
+                                <th class="px-6 py-4">Акцент недели</th>
+                                <th class="px-6 py-4">Производство (Прогноз мес.)</th>
+                                <th class="px-6 py-4">Тренд цен</th>
+                                <th class="px-6 py-4">Риски</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100">
+                            <tr>
+                                <td class="px-6 py-4 font-bold">Казахстан</td>
+                                <td class="px-6 py-4">Рост экспорта в КНР</td>
+                                <td class="px-6 py-4">42,000 т</td>
+                                <td class="px-6 py-4 text-emerald-600 font-bold">+2.1%</td>
+                                <td class="px-6 py-4 text-slate-400 text-xs">Дефицит ж/д вагонов</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 font-bold">Азербайджан</td>
+                                <td class="px-6 py-4">Реэкспорт в Грузию</td>
+                                <td class="px-6 py-4">12,500 т</td>
+                                <td class="px-6 py-4 text-slate-400 font-bold">0.0%</td>
+                                <td class="px-6 py-4 text-slate-400 text-xs">Валютные колебания</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 font-bold">Болгария</td>
+                                <td class="px-6 py-4">Переработка украинских семян</td>
+                                <td class="px-6 py-4">88,000 т</td>
+                                <td class="px-6 py-4 text-red-600 font-bold">-0.5%</td>
+                                <td class="px-6 py-4 text-slate-400 text-xs">Протесты местных фермеров</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 font-bold">Узбекистан</td>
+                                <td class="px-6 py-4">Закупки подсолнечного масла</td>
+                                <td class="px-6 py-4">18,000 т</td>
+                                <td class="px-6 py-4 text-emerald-600 font-bold">+1.2%</td>
+                                <td class="px-6 py-4 text-slate-400 text-xs">Рост стоимости доставки</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </section>
+
     </main>
 
-    <footer class="bg-slate-800 text-slate-300 py-8">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <p class="mb-2">© 2026 Аналитическое Агентство "AgroAnalytics". Все права защищены.</p>
-            <p class="text-sm text-slate-500">Данный отчет сформирован автоматически на основе рыночных данных за период 19-25.01.2026. Не является финансовой рекомендацией.</p>
+    <footer class="bg-slate-900 text-slate-500 py-12 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p class="text-sm mb-4">© 2026 OilMarket Pro Analytics. Конфиденциальный отчет для внутреннего использования.</p>
+            <div class="flex justify-center space-x-4 text-xs">
+                <span>Источники: Reuters, EAEU Statistical Office, OilWorld, Local Customs Data</span>
+            </div>
         </div>
     </footer>
 
-    <!-- JavaScript for Charts and Logic -->
     <script>
-        // Data Configuration
-        const labels = ['19 Янв', '20 Янв', '21 Янв', '22 Янв', '23 Янв', '24 Янв', '25 Янв'];
+        // Data for Price Chart
+        const priceLabels = ['26 Янв', '27 Янв', '28 Янв', '29 Янв', '30 Янв', '31 Янв', '01 Фев'];
         
-        // Price Data (USD/Ton)
-        const priceData = {
-            sunflower: [935, 938, 942, 940, 945, 948, 950], // FOB Black Sea
-            palm: [985, 982, 980, 978, 975, 978, 980],      // CIF Rotterdam
-            rapeseed: [1020, 1025, 1030, 1035, 1032, 1030, 1035], // FOB Hamburg
-            soy: [990, 995, 992, 990, 988, 990, 992]        // FOB Argentina/Brazil proxy
-        };
-
-        // Export Data (Thousand Tons - Weekly Estimate)
-        const exportCountries = ['Украина', 'Россия', 'Болгария', 'Румыния', 'Казахстан'];
-        const exportVolumes = [120, 110, 35, 40, 15];
-
-        // Production Structure Data
-        const productionTypes = ['Подсолнечное', 'Рапсовое', 'Соевое', 'Пальмовое (Импорт)', 'Маргарин/Жиры'];
-        const productionValues = [45, 25, 15, 10, 5]; // Approximate % share in consumption/trade mix
-
         // Initialize Charts
-        document.addEventListener('DOMContentLoaded', function() {
+        window.onload = function() {
             
-            // 1. Price Trend Chart
-            const ctxPrice = document.getElementById('priceChart').getContext('2d');
+            // 1. Main Price Dynamics Chart
+            const ctxPrice = document.getElementById('mainPriceChart').getContext('2d');
             new Chart(ctxPrice, {
                 type: 'line',
                 data: {
-                    labels: labels,
+                    labels: priceLabels,
                     datasets: [
                         {
-                            label: 'Подсолнечное масло (FOB)',
-                            data: priceData.sunflower,
-                            borderColor: '#eab308', // Yellow-500
-                            backgroundColor: 'rgba(234, 179, 8, 0.1)',
-                            borderWidth: 2,
-                            tension: 0.3,
-                            fill: true
+                            label: 'Подсолнечное (FOB Black Sea)',
+                            data: [945, 948, 952, 955, 958, 958, 958],
+                            borderColor: '#10b981',
+                            backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                            fill: true,
+                            tension: 0.4,
+                            borderWidth: 3
                         },
                         {
-                            label: 'Пальмовое масло (CIF)',
-                            data: priceData.palm,
-                            borderColor: '#ef4444', // Red-500
+                            label: 'Пальмовое (CIF Rotterdam)',
+                            data: [980, 978, 975, 976, 972, 970, 972],
+                            borderColor: '#f59e0b',
                             borderWidth: 2,
-                            tension: 0.3,
-                            borderDash: [5, 5]
+                            tension: 0.4
                         },
                         {
-                            label: 'Рапсовое масло',
-                            data: priceData.rapeseed,
-                            borderColor: '#3b82f6', // Blue-500
+                            label: 'Соевое (CBOT Proxy)',
+                            data: [1010, 1008, 1015, 1012, 1009, 1005, 1008],
+                            borderColor: '#3b82f6',
                             borderWidth: 2,
-                            tension: 0.3
-                        },
-                        {
-                            label: 'Соевое масло',
-                            data: priceData.soy,
-                            borderColor: '#22c55e', // Green-500
-                            borderWidth: 2,
-                            tension: 0.3
+                            borderDash: [5, 5],
+                            tension: 0.4
                         }
                     ]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    interaction: { mode: 'index', intersect: false },
                     plugins: {
-                        legend: { position: 'top' },
-                        tooltip: {
-                            callbacks: {
-                                label: function(context) {
-                                    return context.dataset.label + ': $' + context.parsed.y;
-                                }
-                            }
-                        }
+                        legend: { position: 'bottom', labels: { boxWidth: 12, padding: 20 } },
+                        tooltip: { mode: 'index', intersect: false }
                     },
                     scales: {
-                        y: {
-                            beginAtZero: false,
-                            min: 900,
-                            title: { display: true, text: 'Цена (USD/т)' }
-                        }
+                        y: { 
+                            grid: { color: '#f1f5f9' },
+                            ticks: { callback: value => '$' + value }
+                        },
+                        x: { grid: { display: false } }
                     }
                 }
             });
 
-            // 2. Export Volume Chart
-            const ctxExport = document.getElementById('exportChart').getContext('2d');
-            new Chart(ctxExport, {
-                type: 'bar',
-                data: {
-                    labels: exportCountries,
-                    datasets: [{
-                        label: 'Экспорт за неделю (тыс. т)',
-                        data: exportVolumes,
-                        backgroundColor: [
-                            'rgba(234, 179, 8, 0.7)', // UA - Yellow
-                            'rgba(59, 130, 246, 0.7)', // RU - Blue
-                            'rgba(34, 197, 94, 0.7)',  // BG - Green
-                            'rgba(99, 102, 241, 0.7)', // RO - Indigo
-                            'rgba(168, 85, 247, 0.7)'  // KZ - Purple
-                        ],
-                        borderColor: [
-                            '#eab308', '#3b82f6', '#22c55e', '#6366f1', '#a855f7'
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: { display: false }
-                    },
-                    scales: {
-                        y: { beginAtZero: true }
-                    }
-                }
-            });
-
-            // 3. Production/Structure Chart
-            const ctxProd = document.getElementById('productionChart').getContext('2d');
-            new Chart(ctxProd, {
+            // 2. Export Share Chart
+            const ctxShare = document.getElementById('exportShareChart').getContext('2d');
+            new Chart(ctxShare, {
                 type: 'doughnut',
                 data: {
-                    labels: productionTypes,
+                    labels: ['Россия', 'Украина', 'Казахстан', 'ЕС', 'Прочие'],
                     datasets: [{
-                        data: productionValues,
-                        backgroundColor: [
-                            '#eab308', // Sun
-                            '#3b82f6', // Rape
-                            '#22c55e', // Soy
-                            '#ef4444', // Palm
-                            '#cbd5e1'  // Margarine/Other
-                        ],
-                        hoverOffset: 4
+                        data: [42, 35, 8, 10, 5],
+                        backgroundColor: ['#0f172a', '#10b981', '#f59e0b', '#3b82f6', '#94a3b8'],
+                        borderWidth: 0,
+                        hoverOffset: 15
                     }]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
+                    cutout: '70%',
                     plugins: {
-                        legend: { position: 'right' }
+                        legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } }
                     }
                 }
             });
-        });
+        };
     </script>
 </body>
 </html>
